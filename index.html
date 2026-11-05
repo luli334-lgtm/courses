@@ -317,7 +317,7 @@ function examRow(e, opts={}){
 
 /* ---------- live data from the Google Sheet ---------- */
 const SHEET_ID = "1arc7EL5LwQw5zR0ZDuo5CroiIvkoVIrkPhJCWj2A6KQ";
-const LIVE = Object.assign({ tasks: [], schedule: [], at: 0, state: 'idle' }, store.get('live', {}));
+const LIVE = Object.assign({ tasks: [], schedule: [], classes: [], at: 0, state: 'idle' }, store.get('live', {}));
 LIVE.state = 'idle';
 const sheetReady = () => SHEET_ID && !SHEET_ID.startsWith('__');
 
@@ -385,20 +385,27 @@ async function loadLive(){
   if (!sheetReady()) return;
   LIVE.state = 'loading'; paintSync();
   try{
-    const [t, s] = await Promise.all([gviz('משימות'), gviz('מערכת שעות')]);
-    LIVE.tasks = sheetRows(t).map((r, i) => {
+    const [rt, rs, rk] = await Promise.allSettled([gviz('משימות'), gviz('מערכת שעות'), gviz('מערכת מהמכללה')]);
+    if (rt.status !== 'fulfilled' && rs.status !== 'fulfilled' && rk.status !== 'fulfilled') throw new Error('sheet');
+    const t = rt.status === 'fulfilled' ? rt.value : null, s = rs.status === 'fulfilled' ? rs.value : null;
+    if (t)     LIVE.tasks = sheetRows(t).map((r, i) => {
       const c = courseFrom(r['קורס']); const type = (r['סוג'] || 'שיעורי בית').trim();
       return { id: 'r' + i + ':' + (r['כותרת']||'') + (r['תאריך']||''), c: c ? c.id : null, type, k: TYPES[type] || 'hw',
         title: r['כותרת'] || (r['סוג'] ? type : ''), date: fixSwap(normDate(r['תאריך'])), time: normTime(r['שעה']),
         det: r['פרטים'] || '', link: /^https?:\/\//.test(r['קישור']||'') ? r['קישור'] : '' };
     }).filter(x => x.title);
-    LIVE.schedule = sheetRows(s).map(r => {
+    if (s) LIVE.schedule = sheetRows(s).map(r => {
       const c = courseFrom(r['קורס']); const d = String(r['יום']||'').replace(/^יום\s*/,'').replace(/['׳]/g,'').trim();
       return { c: c ? c.id : null, day: DAYIDX[d], start: normTime(r['התחלה']), end: normTime(r['סיום']),
         place: r['מיקום'] || '', link: /^https?:\/\//.test(r['קישור']||'') ? r['קישור'] : '' };
     }).filter(x => x.c && x.day != null && x.start);
+    if (rk.status === 'fulfilled') LIVE.classes = sheetRows(rk.value).map(r => {
+      const c = byId(r['מזהה']) || courseFrom(r['קורס']);
+      return { c: c ? c.id : null, title: r['כותרת'] || '', date: normDate(r['תאריך']), start: normTime(r['התחלה']),
+        end: normTime(r['סיום']), place: r['מיקום'] || '', special: r['סוג'] === 'מיוחד' };
+    }).filter(x => x.date);
     LIVE.at = Date.now(); LIVE.state = 'ok';
-    store.set('live', { tasks: LIVE.tasks, schedule: LIVE.schedule, at: LIVE.at });
+    store.set('live', { tasks: LIVE.tasks, schedule: LIVE.schedule, classes: LIVE.classes, at: LIVE.at });
   }catch(e){ LIVE.state = 'error'; }
   const r = (location.hash||'').slice(1);
   if (r !== 'search' && r !== 'pick'){ const y = scrollY; render(); scrollTo(0, y); } else paintSync();
@@ -424,8 +431,17 @@ function slotNext(sl, now = new Date()){
   }
   return null;
 }
+const lessons = () => LIVE.classes.filter(k => !k.special && k.c && k.start);
+const linkFor = cid => (LIVE.schedule.find(s => s.c === cid && s.link) || {}).link || '';
+function lessonTimes(k){ const s = toDate(k.date, k.start); const e = k.end ? toDate(k.date, k.end) : new Date(s.getTime() + 90*6e4); return { s, e }; }
 function nextClass(onlyMine = true, cid = null){
   const now = new Date();
+  if (lessons().length){
+    const n = lessons().filter(k => (!onlyMine || isMine(k.c)) && (!cid || k.c === cid))
+      .map(k => ({ sl: { c: k.c, start: k.start, end: k.end, place: k.place, link: linkFor(k.c) }, ...lessonTimes(k) }))
+      .filter(x => x.e > now).sort((a,b) => a.s - b.s)[0];
+    return n || null;
+  }
   return LIVE.schedule.filter(sl => (!onlyMine || isMine(sl.c)) && (!cid || sl.c === cid))
     .map(sl => ({ sl, ...slotNext(sl, now) })).filter(x => x.s).sort((a,b) => a.s - b.s)[0] || null;
 }
@@ -445,7 +461,25 @@ function classBanner(cid){
     ${n.sl.link ? `<a class="btn ${live ? 'primary' : 'soft'}" href="${esc(n.sl.link)}" target="_blank" rel="noopener">${/zoom/i.test(n.sl.link) ? 'כניסה לזום' : 'קישור לשיעור'}</a>` : ''}
   </div>`;
 }
+function weekStart(){ const t = today0(); const d = t.getDay(); return new Date(t.getTime() - (d >= 5 ? d - 7 : d) * 864e5); }
+const iso = d => d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
+function dayBlocks(from, days, onlyMine = true){
+  const out = [];
+  for (let i = 0; i < days; i++){
+    const d = new Date(from.getTime() + i*864e5); if (d.getDay() === 6) continue;
+    const ds = iso(d);
+    const ks = LIVE.classes.filter(k => k.date === ds && (k.special || !onlyMine || !k.c || isMine(k.c)));
+    out.push({ d, ds, sp: ks.filter(k => k.special), ls: ks.filter(k => !k.special).sort((a,b) => (a.start||'').localeCompare(b.start||'')) });
+  }
+  return out;
+}
 function weekView(){
+  if (LIVE.classes.length){
+    const ws = weekStart(); const blocks = dayBlocks(ws, 6).filter(b => b.ls.length || b.sp.length);
+    if (!blocks.length) return '';
+    const td = iso(today0());
+    return `<h2>${ws > today0() ? 'השבוע הבא' : 'מערכת השבוע'} <a href="#schedule">כל המערכת</a></h2><div class="card week">${blocks.map(b => `<div class="d${b.ds === td ? ' today' : ''}"><b>${DAYS[b.d.getDay()]}<small style="display:block;font-weight:600;font-size:12px;color:var(--faint)">${b.d.getDate()}.${b.d.getMonth()+1}</small></b><div>${b.sp.map(k => `<span class="slot" style="background:#fbeceb;color:#8a4a45">${esc(k.title)}</span>`).join('')}${b.ls.map(k => { const c = byId(k.c) || {}; return `<a class="slot" href="#c-${k.c || ''}" style="${c.id ? tintVars(c) : ''}">${k.start} ${esc(c.short || k.title)}</a>`; }).join('')}</div></div>`).join('')}</div>`;
+  }
   const mine = LIVE.schedule.filter(sl => isMine(sl.c)); if (!mine.length) return '';
   const td = new Date().getDay();
   const days = [0,1,2,3,4,5].map(d => ({ d, s: mine.filter(x => x.day === d).sort((a,b) => a.start.localeCompare(b.start)) })).filter(x => x.s.length);
@@ -479,6 +513,33 @@ function taskRow(t, opts = {}){
   </div>`;
 }
 const sortTasks = l => l.slice().sort((a,b) => (a.date||'9999').localeCompare(b.date||'9999') || (a.time||'').localeCompare(b.time||''));
+
+function scheduleView(){
+  if (!LIVE.classes.length) return `<main class="wrap"><h1>מערכת שעות</h1><div class="card empty">המערכת מהמכללה עוד לא נטענה. היא מתעדכנת אוטומטית כל שעה.</div>${syncLine()}</main>`;
+  const span = store.get('span', 14);
+  const blocks = dayBlocks(today0(), span).filter(b => b.ls.length || b.sp.length);
+  const b = (v, l) => `<button type="button" data-span="${v}" aria-pressed="${span == v}">${l}</button>`;
+  return `<main class="wrap">
+    <h1>מערכת שעות</h1>
+    <p class="lead">מתעדכנת אוטומטית מהידיעון של המכללה, בערך פעם בשעה. השינויים של המכללה מופיעים כאן לבד.</p>
+    <div class="seg">${b(7,'שבוע')}${b(14,'שבועיים')}${b(35,'חודש')}</div>
+    ${blocks.map(x => `<h2>יום ${DAYS[x.d.getDay()]} · ${x.d.getDate()}.${x.d.getMonth()+1}${x.ds === iso(today0()) ? ' · היום' : ''}</h2>
+      <div class="card list">${x.sp.map(k => `<div class="exam"><div class="body"><div class="name" style="color:#8a4a45">${esc(k.title)}</div></div></div>`).join('')}
+      ${x.ls.map(k => lessonRow(k)).join('')}</div>`).join('') || '<div class="card empty">אין שיעורים בתקופה הזו</div>'}
+    ${syncLine()}
+  </main>`;
+}
+function lessonRow(k, opts = {}){
+  const c = byId(k.c) || { short: k.title }; const { s, e } = lessonTimes(k); const now = new Date();
+  const live = now >= s && now < e;
+  return `<div class="exam" style="${c.id ? tintVars(c) : ''}">
+    <div class="date" style="width:64px"><b style="font-size:16px">${k.start}</b><span>${k.end ? 'עד ' + k.end : ''}</span></div>
+    <div class="body">${opts.date ? `<div class="sub">יום ${DAYS[s.getDay()]} ${s.getDate()}.${s.getMonth()+1}</div>` : ''}
+      <a class="name" href="#c-${c.id || ''}" style="text-decoration:none">${esc(c.short)}</a>
+      <div class="sub">${esc(k.title)}${k.place ? ' · ' + esc(k.place) : ''}</div></div>
+    ${live ? '<span class="days near"><span class="pulse"></span>עכשיו</span>' : ''}
+  </div>`;
+}
 
 function tasksView(){
   if (!sheetReady()) return `<main class="wrap"><h1>משימות</h1><div class="card empty">עוד לא חיברנו את טבלת העדכונים.</div></main>`;
@@ -659,6 +720,8 @@ function courseView(c){
     </div></div></div>
   <main class="wrap" style="${tintVars(c)}">
     ${classBanner(c.id)}
+    ${(() => { const l = lessons().filter(k => k.c === c.id && lessonTimes(k).e > new Date()).slice(0, 4);
+      return l.length ? `<h2>השיעורים הבאים <a href="#schedule">כל המערכת</a></h2><div class="card list">${l.map(k => lessonRow(k, { date: true })).join('')}</div>` : ''; })()}
     ${c.note ? `<div class="note">${esc(c.note)}</div>` : ''}
     ${(() => { const l = sortTasks(LIVE.tasks.filter(t => t.c === c.id && (t.k === 'msg' || !t.date || daysTo(t.date) >= -3)));
       return l.length ? `<h2>שיעורי בית, עבודות והודעות</h2><div class="card list">${l.map(t => taskRow(t, { noCourse: true })).join('')}</div>` : ''; })()}
@@ -674,7 +737,10 @@ function courseView(c){
     <h2>פרטי הקורס</h2>
     <div class="card missing">
       ${c.code ? `<div><b>מספר קורס</b><span style="color:var(--ink)">${esc(c.code)}</span></div>` : ''}
-      ${(() => { const sl = LIVE.schedule.filter(s => s.c === c.id);
+      ${(() => { let sl = LIVE.schedule.filter(s => s.c === c.id);
+        if (!sl.length){ const seen = {}; lessons().filter(k => k.c === c.id && daysTo(k.date) >= 0 && daysTo(k.date) < 14).forEach(k => {
+          const d = toDate(k.date).getDay(); const key = d + k.start; if (!seen[key]) seen[key] = { c: c.id, day: d, start: k.start, end: k.end, place: k.place, link: '' }; });
+          sl = Object.values(seen).sort((x,y) => x.day - y.day || x.start.localeCompare(y.start)); }
         return `<div><b>מועד השיעור</b>${sl.length ? `<span style="color:var(--ink)">${sl.map(s => 'יום ' + DAYS[s.day] + ' <span dir="ltr">' + s.start + (s.end ? '–' + s.end : '') + '</span>' + (s.place ? ' · ' + esc(s.place) : '')).join('<br>')}</span>` : '<span>עוד לא נוסף</span>'}</div>
           ${sl.find(s => s.link) ? `<div><b>קישור לשיעור</b><a href="${esc(sl.find(s => s.link).link)}" target="_blank" rel="noopener" style="color:var(--blue-ink);font-weight:600">פתיחה</a></div>` : ''}`; })()}
     </div>
@@ -705,7 +771,7 @@ function drawer(route){
   const others = DATA.courses.filter(c => !mine.includes(c.id));
   $('#drawer').innerHTML = `<h3>הקורסים שלי</h3>${DATA.courses.filter(c => mine.includes(c.id)).map(item).join('')}
     ${others.length ? `<hr><h3>שאר הקורסים</h3>${others.map(item).join('')}` : ''}
-    <hr><a href="#pick">⚙︎ בחירת הקורסים שלי</a>`;
+    <hr><a href="#schedule">🗓 מערכת שעות</a><a href="#pick">⚙︎ בחירת הקורסים שלי</a>`;
 }
 function setMenu(open){ $('#drawer').classList.toggle('open', open); $('#overlay').classList.toggle('open', open); $('#menu').setAttribute('aria-expanded', open); }
 $('#menu').onclick = () => setMenu(!$('#drawer').classList.contains('open'));
@@ -725,7 +791,7 @@ function render(){
   const route = (location.hash || '#home').slice(1) || 'home';
   let html;
   if (route.startsWith('c-') && byId(route.slice(2))) html = courseView(byId(route.slice(2)));
-  else html = ({ tasks:tasksView, exams:examsView, plan:planView, search:searchView, pick:pickView }[route] || homeView)();
+  else html = ({ schedule:scheduleView, tasks:tasksView, exams:examsView, plan:planView, search:searchView, pick:pickView }[route] || homeView)();
   $('#app').innerHTML = html;
   const tab = ['tasks','exams','plan','search'].includes(route) ? route : 'home';
   document.querySelectorAll('.tabs a').forEach(a => a.classList.toggle('on', a.dataset.r === tab));
@@ -742,6 +808,7 @@ document.addEventListener('click', e => {
   const tt = e.target.closest('[data-t]');
   if (tt){ const d = doneTasks(); const id = tt.dataset.t; d.has(id) ? d.delete(id) : d.add(id); store.set('doneTasks', [...d]); const y = scrollY; render(); scrollTo(0,y); return; }
   if (e.target.closest('[data-refresh]')){ loadLive(); return; }
+  const sp = e.target.closest('[data-span]'); if (sp){ store.set('span', +sp.dataset.span); render(); return; }
   const tf = e.target.closest('[data-tf]'); if (tf){ store.set('taskFilter', tf.dataset.tf); render(); return; }
   if (e.target.closest('[data-hide]')){ store.set('hideDone', !store.get('hideDone', false)); render(); return; }
   const f = e.target.closest('[data-f]'); if (f){ store.set('examFilter', f.dataset.f); render(); return; }
@@ -757,7 +824,7 @@ addEventListener('hashchange', () => { render(); scrollTo(0,0); });
 render();
 loadLive();
 // keep "class starts in…" fresh, and pull new homework when the app comes back to the screen
-setInterval(() => { const r = (location.hash||'#home').slice(1); if (r === 'home' || r === '' || r.startsWith('c-')){ const y = scrollY; render(); scrollTo(0,y); } }, 60000);
+setInterval(() => { const r = (location.hash||'#home').slice(1); if (r === 'home' || r === '' || r === 'schedule' || r.startsWith('c-')){ const y = scrollY; render(); scrollTo(0,y); } }, 60000);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && Date.now() - LIVE.at > 120000) loadLive(); });
 </script>
 </body>
