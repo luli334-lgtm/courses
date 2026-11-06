@@ -520,7 +520,9 @@ function slotNext(sl, now = new Date()){
   }
   return null;
 }
-const isExamLesson = k => /מבחן|בחינה/.test(k.title || '') || examsSorted().some(e => e.c === k.c && e.date === k.date && e.time === k.start);
+// a class-feed entry is the exam itself only if it also ends when the exam ends (a normal class can start at the same hour)
+const lenH = k => { if (!k.end || !k.start) return 0; const m = t => { const [h,mi] = t.split(':').map(Number); return h*60 + mi; }; return (m(k.end) - m(k.start)) / 60; };
+const isExamLesson = k => /מבחן|בחינה/.test(k.title || '') || examsSorted().some(e => e.c === k.c && e.date === k.date && e.time === k.start && (e.end ? e.end === k.end : lenH(k) >= 3));
 const allLessons = () => expand(LIVE.classes.filter(k => !k.special)).map(k => Object.assign(k, { exam: k.c && k.start ? isExamLesson(k) : false }));
 const lessons = () => allLessons().filter(k => k.c && k.start && !k.exam);
 const linkFor = cid => (LIVE.schedule.find(s => (s.c === cid || (byId(s.c) || {}).src === cid) && s.link) || {}).link || '';
