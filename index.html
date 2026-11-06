@@ -185,6 +185,62 @@ select{font:inherit;font-size:14.5px;border:1px solid var(--line);border-radius:
 .foot{margin:36px 0 10px;color:var(--faint);font-size:13px;text-align:center;line-height:1.7}
 .foot a{color:var(--muted)}
 .empty{padding:18px;color:var(--muted);text-align:center}
+/* --- color & emphasis --- */
+body{background:linear-gradient(180deg,#e2f1eb 0,#e7f0f6 260px,#f1f6f5 620px) no-repeat,#f1f6f5}
+.top{background:rgba(234,244,240,.9)}
+h2::before{content:"";display:inline-block;width:4px;height:15px;border-radius:2px;background:linear-gradient(#A9DDB6,#A6CEF0);margin-inline-end:8px;vertical-align:-2px}
+h2{justify-content:flex-start}
+h2 a{margin-inline-start:auto}
+.features{display:grid;gap:12px;margin-top:18px}
+main > .feature{margin-top:16px}
+@media (min-width:760px){.features{grid-template-columns:1fr 1fr}}
+.feature{position:relative;display:flex;gap:14px;align-items:center;padding:18px 18px 18px 16px;border-radius:20px;
+  background:var(--tint);border:1.5px solid var(--tint-dot);box-shadow:0 6px 18px -8px var(--tint-dot);overflow:hidden}
+.feature::after{content:"";position:absolute;inset-inline-start:-30px;top:-30px;width:120px;height:120px;border-radius:50%;background:var(--tint-dot);opacity:.35}
+.feature .ficon{flex:none;width:48px;height:48px;border-radius:15px;background:var(--tint-dot);color:var(--tint-deep);display:grid;place-items:center;position:relative;z-index:1}
+.feature .ficon svg{width:26px;height:26px}
+.feature .fbody{flex:1;min-width:0;position:relative;z-index:1;display:grid;gap:3px}
+.feature .flabel{justify-self:start;font-size:13.5px;font-weight:800;letter-spacing:.01em;color:#fff;background:var(--tint-deep);padding:3px 11px;border-radius:99px}
+.feature .ftitle{font-size:22px;font-weight:800;line-height:1.2;color:var(--tint-deep);text-decoration:none}
+.feature .fmeta{font-size:14.5px;color:var(--tint-ink)}
+.feature .fmeta b{color:var(--tint-deep)}
+.feature .btn{position:relative;z-index:1;align-self:center}
+.feature .count{margin-top:2px}
+.feature .cdl{font-size:12.5px;font-weight:800;color:var(--tint-deep);margin-top:6px}
+.feature .count div{background:rgba(255,255,255,.75);min-width:58px;padding:6px 10px}
+.feature .count b{font-size:22px;color:var(--tint-deep)}
+.btn.ghost{background:rgba(255,255,255,.6);border-color:transparent;color:var(--tint-deep,var(--accent-ink))}
+.btn.soft{background:rgba(255,255,255,.7);color:var(--tint-deep,var(--accent-ink))}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.quick a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border-radius:16px;text-decoration:none;font-weight:700;font-size:13.5px;
+  background:color-mix(in srgb,var(--q) 35%,#fff);color:color-mix(in srgb,var(--q) 30%,#1e2a2a);border:1px solid color-mix(in srgb,var(--q) 60%,#fff)}
+.quick a svg{width:24px;height:24px}
+.course{background:linear-gradient(135deg,var(--tint-soft),#fff 70%)}
+.exam.tinted{background:linear-gradient(to left,var(--tint-soft),#fff 75%)}
+.exam .kind{font-size:12px;font-weight:800;color:var(--tint-deep);letter-spacing:.01em}
+/* --- weekly grid --- */
+.wrap.wide{max-width:1100px}
+.wnav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:6px 0 10px}
+.wnav button{border:1px solid var(--line);background:#fff;border-radius:12px;width:44px;height:38px;font-size:18px;cursor:pointer;color:var(--accent-ink)}
+.wnav div{font-size:15px;color:var(--muted)}
+.wnav b{color:var(--ink)}
+.gwrap{overflow-x:auto;padding:8px 6px 10px}
+.grid7{display:grid;grid-template-columns:42px repeat(6,minmax(96px,1fr));min-width:630px}
+.gcol{border-inline-start:1px solid var(--line2)}
+.gcol.today .ghead b{color:#fff;background:var(--accent);padding:1px 9px;border-radius:99px}
+.gcol.today .gbody{background:rgba(169,221,182,.12)}
+.ghead{height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:13.5px}
+.ghead span{font-size:11.5px;color:var(--faint);font-weight:600}
+.gsp{min-height:22px;margin:0 3px 4px;font-size:11px;font-weight:700;color:#8a4a45;background:#fbeceb;border-radius:6px;padding:3px 5px;line-height:1.25}
+.gsp.empty{background:none;padding:0}
+.gbody{position:relative}
+.gl{position:absolute;inset-inline:0;border-top:1px dashed var(--line2)}
+.gtimes .gbody span{position:absolute;inset-inline-end:6px;transform:translateY(-50%);font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
+.gtimes .gbody span:first-child{transform:none}
+.gev{position:absolute;border-radius:9px;padding:4px 6px;text-decoration:none;overflow:hidden;display:flex;flex-direction:column;gap:1px;
+  background:var(--tint);border-inline-start:3px solid var(--tint-dot);color:var(--tint-deep);font-size:11.5px;line-height:1.25;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.gev b{font-size:12px;font-weight:800}
+.gev span{color:var(--tint-ink)}
 /* live class banner */
 .live{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;margin-top:16px;border-radius:var(--r);
   background:var(--blue-soft);border:1px solid #d3e3ef}
@@ -236,16 +292,17 @@ select{font:inherit;font-size:14.5px;border:1px solid var(--line);border-radius:
 
 <nav class="tabs" aria-label="ניווט"><div class="wrap">
   <a href="#home" data-r="home"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>בית</a>
+  <a href="#schedule" data-r="schedule"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M9 9v12M15 9v12"/></svg></span>מערכת</a>
   <a href="#tasks" data-r="tasks"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg></span>משימות</a>
   <a href="#exams" data-r="exams"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>מבחנים</a>
-  <a href="#plan" data-r="plan"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg></span>חזרה</a>
+  
   <a href="#search" data-r="search"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>חיפוש</a>
 </div></nav>
 
 <div class="overlay" id="overlay"></div>
 <nav class="drawer" id="drawer" aria-label="הקורסים"></nav>
 
-<script id="data" type="application/json">{"updated": "2026-11-05", "semester": "שנה א' · סמסטר א' · תשפ״ז", "courses": [{"id": "exact", "name": "מבוא למדעים מדויקים", "short": "מדעים מדויקים", "tint": "sky", "lecturers": ["רוה אסנת", "מגן אסף"], "examName": "מבוא למדעים מדויקים ב'+ג' – פיסיקה", "code": "1767", "folders": [["פיזיקה – מחזור ו", "https://drive.google.com/drive/folders/1Bdp8wYTQp2TM0WGXABLT6fpoYlF_4IN9"]], "materials": [{"t": "יחסי מידות", "u": "https://drive.google.com/file/d/1Btq4Ruu8_gcln9KG11oeTmuxsGfMwc7z/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "הערות שיעור 26.11.2023", "u": "https://drive.google.com/file/d/1BlrxOmzBzDTQDy1yRnqx8pIhnLP1OTl4/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}], "hex": "#A6CEF0"}, {"id": "stats", "name": "סטטיסטיקה למקצועות הבריאות", "short": "סטטיסטיקה", "tint": "mint", "lecturers": ["ליבוביץ שי", "ברונר ליעד"], "code": "1885", "folders": [["סטטיסטיקה – מחזור ו", "https://drive.google.com/drive/folders/1BF8jbiH-_huASPBwS1iEK-jHRjyOI4V4"]], "materials": [{"t": "סיכום עד שיעור 4 כולל", "u": "https://drive.google.com/file/d/1BFgV4xT8YHhNAVfV7D5ate9RVGW4qqYt/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד 24.12 כולל", "u": "https://drive.google.com/file/d/1EYuWOfpRVbDwG9e5A0VhOxeD3mxBN5f7/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}], "hex": "#9CDAD3"}, {"id": "anat", "name": "אנטומיה א' – גו וגף עליון", "short": "אנטומיה א'", "tint": "sage", "lecturers": ["בן אולה", "ויסמן ענבל", "צייטלין לירון"], "code": "3748", "examNote": "שני מבחנים בכל מועד – כנראה מבחן זיהוי ומבחן מסכם. כדאי לוודא מול הידיעון.", "folders": [["אנטומיה – מחזור ו", "https://drive.google.com/drive/folders/1BLm6eDNU6E1ExffQ3SKWe3UOVajGGFBo"], ["אנטומיה – ארכיון", "https://drive.google.com/drive/folders/1-AcTEMATIUf4xmYgKQn5aaIJmH0gnioU"]], "materials": [{"t": "סיכום כל החומר – יובל פדר", "u": "https://drive.google.com/file/d/1Fttxs7etH4JhazDpWdEJKdgCAgJQLKER/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום באנטומיה – לי הנס", "u": "https://drive.google.com/file/d/1Fdbt_5bRqF85qqvDf7vOZkSgAqTlno8M/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד 17.12 כולל – רוני", "u": "https://drive.google.com/file/d/1E_QAu_wJXrubCtopX0k8Ez-jCp9qs3pm/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום אנטומיה – הכל", "u": "https://drive.google.com/file/d/1kmzw5Hto8kUEG_xTTUHbek_NHG2l4hZs/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "סיכום לסיכום אנטומיה", "u": "https://drive.google.com/file/d/1HesMGOUkixRvaUg9_mjXaRfrpSw6-w8l/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "סיכום לבוחן אמצע 2", "u": "https://drive.google.com/file/d/1ZBFQoO4hgbnCsfNaHTscNq4oKWab0H5l/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "פתולוגיות למבחן – כל סמסטר א'", "u": "https://drive.google.com/file/d/14NaN_rMf6moMymUlB1WYP5vNU6AHmMj9/view", "x": "pdf", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "רמות ארגון – סוגי רקמות", "u": "https://drive.google.com/file/d/1BMrXVRD9j_h5XTK9KQtWLUQQYzGY9FBK/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "עצמות וסחוסים", "u": "https://drive.google.com/file/d/1BaEjiedUGlRmCvrv1o05cylU3W76WzVO/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "מערכת השרירים", "u": "https://drive.google.com/file/d/1vv0hNwERs1D0mozVQvGQS4YU8iANF6zk/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "מפרקים", "u": "https://drive.google.com/file/d/1HPCB7nHSCExCXxeUR1If7cRTHdp8_5Cs/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "מפרק הכתף (שיעור 18.12)", "u": "https://drive.google.com/file/d/1XE6gVqp8ksmfdbNl5PVPj7F7c77Ir7t-/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "עמוד השדרה", "u": "https://drive.google.com/file/d/1jc5lN_LCEPDK_vkfnKX-Yf0mXFkfqjUC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "Axilla – בית השחי", "u": "https://drive.google.com/file/d/1v6hkf6rdtvwK5xo1CcxZPcRwh4M-fp34/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "Axilla", "u": "https://drive.google.com/file/d/14QaR5jW9p3jzyh21WTi5k7kKzoK5_120/view", "x": "pdf", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "פתולוגיה של גף עליון ותחתון", "u": "https://drive.google.com/file/d/1Ek1U-GKJBnX5kDPq7SrYChJG_rKZPJOI/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מבואות", "u": "https://drive.google.com/file/d/1odLkLM1BU9oH2yQPGuORmWJ-t6nGlGLQ/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מערכות הגוף", "u": "https://drive.google.com/file/d/1l3zyAe4HOBWfJo9br_Q5NOOZZQ_cG_YA/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – רקמות", "u": "https://drive.google.com/file/d/11W0PQ-0G5ykPFbRFDxRj4Zj2J2DG2rUN/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – עצמות וסחוסים", "u": "https://drive.google.com/file/d/1m735ZgocD2Bs2fpm-KCNL1Vr4QGy6R0c/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מפרקים", "u": "https://drive.google.com/file/d/18K5qVUIF0D-r0Exeuh6dDfFWrg77sMC5/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – שרירים", "u": "https://drive.google.com/file/d/1wEDPCfaC5f7E205EJ16QxUJ7tsobetuI/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – עמוד השדרה", "u": "https://drive.google.com/file/d/1ljN9cDxxdzRVu2MLdczlzBYhQmppRxno/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – גף עליון: עצמות ושרירים", "u": "https://drive.google.com/file/d/1zA7fwk8k552h-YXQWVsxvn3vJXGP6HTb/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – האמה: עצמות, שרירים, עצבים", "u": "https://drive.google.com/file/d/1NN_A-i6gZk9gilviTrDX_Gp-TeaGK7y1/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – כף היד", "u": "https://drive.google.com/file/d/1u9lJR0o_igq1VckRNbMHaSiNfx1NazhD/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – Axilla", "u": "https://drive.google.com/file/d/1-NZC-8iZZa1YVj4AYu4w8jmFGu5QT_sV/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – גף תחתון", "u": "https://drive.google.com/file/d/1WSfFaNSEEAviBJ_AzB4RSrMJPbT1qdSm/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "טבלת שרירים – מאיה טפרמן", "u": "https://drive.google.com/file/d/1J005a4HIOGN0zFUnb1cXYFuRvq9Ano54/view", "x": "pdf", "s": "מחזור ו", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירים – חגורת הכתפיים", "u": "https://drive.google.com/file/d/12ny2qXVqqX9I4cmQ4MuW_ozvPTzU5-Ga/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירי אמה – מדור קדמי", "u": "https://drive.google.com/file/d/1SBMItDsdm5wsBEe0TYAJVLwN3aZHUHDI/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירי אמה – מדור אחורי", "u": "https://drive.google.com/file/d/1tT1HeTS49bhXJrABI-zhytAbxkQvRYkr/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירים, סיכום מפרקים, אקסילה", "u": "https://drive.google.com/file/d/1FOQgM04oRrNpFW1gwRusI6sJrpcQsNn1/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "Muscles by Movement", "u": "https://drive.google.com/file/d/1ixPSg2SHjdYXA0oMJY4K4KAM4duUA6Ad/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "Complete Anatomy & Muscle and Motion", "u": "https://drive.google.com/file/d/1ELOPv0Tzbe_rGmRkR797bbKuTVGsayrV/view", "x": "docx", "s": "מחזור ו", "c": "טבלאות ודפי עזר"}, {"t": "חוברת שחזורים תשפ״ב", "u": "https://drive.google.com/file/d/1-THijuFhL6GJ4V-JOzwXVq0dUl8gvMAf/view", "x": "pdf", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שחזור אנטומיה", "u": "https://drive.google.com/file/d/1FTvsMjk8zelDph3zuVo-yyShc6C-fB4c/view", "x": "doc", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שחזורים באנטומיה", "u": "https://drive.google.com/file/d/1OHM51vMjsnH_SLwSCiM35rzIu_0CAyu8/view", "x": "rtf", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "בחן זיהוי מבנים #1", "u": "https://drive.google.com/file/d/109fTMmdVlwAS1zlfIQ6kNq9S0p7404ux/view", "x": "pptx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "בחן זיהוי מבנים #2", "u": "https://drive.google.com/file/d/105jFIl80LVNLbZ4rmT7_5PLk01LIBmDB/view", "x": "pptx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תרגיל – חזרה למבחן זיהוי", "u": "https://drive.google.com/file/d/1cyrmxgI-9R7aqSjwFxgSSIR6-4O67EwW/view", "x": "pptx", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות לדוגמא – מבחן מסכם (1)", "u": "https://drive.google.com/file/d/1Fa9ZkduznFjHUITQ_E8qzJp8Nb9DXi4J/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות לדוגמא – מבחן מסכם (2)", "u": "https://drive.google.com/file/d/1CgAXH1LbEmGPzZTqUw3mmApDodG9jeZI/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "מבחן לדוגמא 2", "u": "https://drive.google.com/file/d/1MEnlSynBNbuCarLSgM3NjDAf1thW6aed/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תרגול למבחן באנטומיה", "u": "https://drive.google.com/file/d/1VOVgFTIXU1k7kl1PV5xedBP0Fq3_fCMi/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תרגול מבחן – שנה א' ספורטתרפיה", "u": "https://drive.google.com/file/d/1FxpG9zMdL1jZkZZIyEBkplc_FxpOslve/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות תרגול – אוניברסיטת ת\"א", "u": "https://drive.google.com/file/d/1FuDM4LE3Arr6PWmDbLDNXfBFL5ALvf0b/view", "x": "pdf", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}], "hex": "#A9DDB6"}, {"id": "anatintro", "name": "מבוא לאנטומיה", "short": "מבוא לאנטומיה", "tint": "seafoam", "lecturers": ["צייטלין לירון", "ויסמן ענבל", "גוטשלק יאיר נגה"], "folders": [["אנטומיה – מחזור ו", "https://drive.google.com/drive/folders/1BLm6eDNU6E1ExffQ3SKWe3UOVajGGFBo"]], "note": "אין בתיקיות תיקייה נפרדת לקורס. כאן נושאי המבוא מתוך תיקיית האנטומיה, ושאר החומר נמצא בעמוד של אנטומיה א'.", "materials": [{"t": "רמות ארגון – סוגי רקמות", "u": "https://drive.google.com/file/d/1BMrXVRD9j_h5XTK9KQtWLUQQYzGY9FBK/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "עצמות וסחוסים", "u": "https://drive.google.com/file/d/1BaEjiedUGlRmCvrv1o05cylU3W76WzVO/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מבואות", "u": "https://drive.google.com/file/d/1odLkLM1BU9oH2yQPGuORmWJ-t6nGlGLQ/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מערכות הגוף", "u": "https://drive.google.com/file/d/1l3zyAe4HOBWfJo9br_Q5NOOZZQ_cG_YA/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – רקמות", "u": "https://drive.google.com/file/d/11W0PQ-0G5ykPFbRFDxRj4Zj2J2DG2rUN/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}], "hex": "#F2E29B"}, {"id": "writing", "name": "כתיבה אקדמית", "short": "כתיבה אקדמית", "tint": "powder", "lecturers": ["לרנר ענת"], "folders": [], "materials": [], "note": "עוד אין חומרים לקורס הזה. יש לך סיכום או את הנחיות העבודה? שלחי ואוסיף.", "hex": "#DDB5EC"}, {"id": "psych", "name": "פסיכולוגיה (מבוא + התפתחותית)", "short": "פסיכולוגיה", "tint": "lilacblue", "lecturers": ["ארבל עידו"], "code": "4433", "folders": [["פסיכולוגיה – מחזור ו", "https://drive.google.com/drive/folders/1AtXTRS7fkPQtGk8dvhiy-i_rmHpsBVzp"], ["פסיכולוגיה – ארכיון", "https://drive.google.com/drive/folders/1-IgFcA_Dknvst_71V_4d5HZZ06P91Gw4"]], "materials": [{"t": "סיכום עד 11.12 כולל", "u": "https://drive.google.com/file/d/1B83G7RS_vMSyMEbOj2n4MvgPTzbv9nie/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד שיעור 18.12 כולל", "u": "https://drive.google.com/file/d/1EJWFvOxt33UMg8qhr-kj982Zvi6G5AAI/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד 25.12 כולל", "u": "https://drive.google.com/file/d/1EWQc98RUOqIKVBEr5Y7bybPBPwZE2Myt/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "מבוא לפסיכולוגיה – סיכום החומר", "u": "https://drive.google.com/file/d/1D8gVQjMo6J3Xr8AhTYinarIn4bcf0vmw/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "סיכום למבחן מסכם", "u": "https://drive.google.com/file/d/1D8Qj9_LH40HxhfvEOY0yk3PHlYVPwX3j/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "סיכום מבוא לפסיכולוגיה", "u": "https://drive.google.com/file/d/1oQtlJo3mwNM_n-Zaj9TveqYBzqfHIUD5/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "רשימת מושגים למבחן – עם הסברים", "u": "https://drive.google.com/file/d/1zee7J17_dEQ4AJsCC4JtCZiWzjbJ7qxD/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "מושגים למבחן", "u": "https://drive.google.com/file/d/1K6-rqlxYp_S2Pr_XUnQGfYiE7wfHoyQN/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "מבחן לדוגמא", "u": "https://drive.google.com/file/d/1DSuqa9ipbZ-zmeQr7Z36QYQTuwVXlyZD/view", "x": "docx", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תשובות למבחן לדוגמא", "u": "https://drive.google.com/file/d/1DNgfXsbujFXw79wsmGuOygv9yS3PPllc/view", "x": "docx", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות ותשובות לדוגמא", "u": "https://drive.google.com/file/d/1DEIS27J82mAeLsnrBUJLhwT0yYQ-WUlZ/view", "x": "html", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות מבחן לדוגמא", "u": "https://drive.google.com/file/d/1DWe19p5-9jURZYgCjy0ss5HuUatOa1jl/view", "x": "docx", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות חזרה למבחן", "u": "https://drive.google.com/file/d/1321Zi-rgy9-FiBGzsAeLmSZg0Chv1bmm/view", "x": "pdf", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות למבחן", "u": "https://drive.google.com/file/d/1tyG5_15N6f4zZD4vIi5_NkLYKMraws6v/view", "x": "docx", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות למבחן – חיזוקים ועונשים", "u": "https://drive.google.com/file/d/1KyPt-WWid-RbIsbV-2sWptjrFyrnajG9/view", "x": "docx", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}], "hex": "#F3B4D2"}, {"id": "english", "name": "אנגלית מתקדמים א'", "short": "אנגלית", "tint": "sky", "lecturers": ["וילבר קרול"], "code": "4959", "examName": "אנגלית מתקדמים א רמה B – למקצועות הבריאות", "folders": [], "materials": [], "hex": "#F8C59B"}, {"id": "sport", "name": "מבוא לספורט תרפיה", "short": "מבוא לספורט תרפיה", "tint": "mint", "lecturers": ["הרף אלמכיאס אפרת", "ויסמן ענבל"], "folders": [["מבוא למקצועות הבריאות – מחזור ו", "https://drive.google.com/drive/folders/1EFb_9tmpevVcfKOQmzennOmuXIgsnJvz"]], "note": "במחזור הקודם הקורס נקרא \"מבוא למקצועות הבריאות\".", "materials": [{"t": "דוח סיכום סיורים", "u": "https://drive.google.com/file/d/1EHPoOMkr7iGiqB0Yv5zV0_9J_PfU4bvL/view", "x": "docx", "s": "מחזור ו", "c": "סיכומים מלאים"}], "hex": "#C9D1D6"}, {"id": "chem", "name": "מבוא לכימיה וביוכימיה", "short": "כימיה", "tint": "seafoam", "lecturers": ["רוה אסנת", "גוטשלק יאיר נגה"], "code": "92047", "examNote": "שני מבחנים מסומנים כמועד א' (3.12 ו-4.2). ייתכן שהראשון הוא בוחן או חלק נפרד. כדאי לוודא.", "folders": [["כימיה וביוכימיה – מחזור ו", "https://drive.google.com/drive/folders/1Ap99bxjcRia2_DKtVlEe6y3ZBL4mpO3H"], ["כימיה – ארכיון", "https://drive.google.com/drive/folders/1-Af5Nvb2fA01wzJjgFuI7B8BeAyporVU"]], "materials": [{"t": "כימיה וביוכימיה – סיכום", "u": "https://drive.google.com/file/d/1F1H1ih78RcsmDHUjnsKzA6tNDCt5S9we/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "כימיה – סיכום", "u": "https://drive.google.com/file/d/1AphIU1Vxiv6GspyX1GnJmxfO0TIFh18x/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום מבוא לכימיה עד שיעור 4.12", "u": "https://drive.google.com/file/d/1BJxK-7pvPR2nqR9yQVOObFBs17KvgvU2/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "ביוכימיה – הגר וצחי", "u": "https://drive.google.com/file/d/1aYW1694tOK1qsOKjiilUdL4AJ9p-8oMf/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "כימיה – מצגות 1-3", "u": "https://drive.google.com/file/d/1C0uoxFLHNbhASXSV2opSKu81ElQ8eujv/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "מבנה האטום וקשרים", "u": "https://drive.google.com/file/d/1BtCoy1Q2rieoRTWNMm9FljS-PfMeTlqv/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "הסבר על שיעור 11.12", "u": "https://drive.google.com/file/d/1As37iMfTin3gcquImpNvfpeU9uPwV6Pw/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "שיעור 3", "u": "https://drive.google.com/file/d/1gOkyQj6qYFyzlSeoxUuCr5olUk-_vRLh/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "קשרים כימיים", "u": "https://drive.google.com/file/d/1f4D_jvsV9liQOL3Uizy4NJ91SFzObcBW/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 8 – נוסחאות מבנה", "u": "https://drive.google.com/file/d/16ClJaqLz432fdvnCinzUjHUfx0eqJvEB/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 9 – תכונות חומרים מולקולריים", "u": "https://drive.google.com/file/d/1r8KmuLWSqSkG8pr9UovxHQ20UIvPTyjC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 10 – קוטביות", "u": "https://drive.google.com/file/d/1JO7qu4I4tG9W1eqHLSfFWXhiQLPxGm0L/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 11 – קשרי ו.ד.ו וקשרי מימן", "u": "https://drive.google.com/file/d/1DGAeS6mXQ-wYqv80YcI3y2Taw0KcR7MC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 12 – תמיסות", "u": "https://drive.google.com/file/d/1N5PhBg9syxuJd4SPoStC7tDoTNikIjqI/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 13 – חומצות ובסיסים", "u": "https://drive.google.com/file/d/1xGsBEY8_WPmNsaL9oGKH8O5IxxFnylNa/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 14 – מבנה התא", "u": "https://drive.google.com/file/d/1_54eOyZqVqu72v6YHA7_VY3cBGY5hN7D/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "ביוכימיה – קרום ואברוני התא", "u": "https://drive.google.com/file/d/1cHjLUU4OSg9izJRDoSZp24XHa8u5Z8OV/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעורים 15-16 – סוכרים 1", "u": "https://drive.google.com/file/d/1gI3yYvpmt0GIpOXmgJJU4mM-wmLQsD9W/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעורים 17-18 – סוכרים 2", "u": "https://drive.google.com/file/d/16NDLRTy1rM4eSFskaibXS8MgcrDQiFbS/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סוכרים 1", "u": "https://drive.google.com/file/d/1pGkvDGpRpRI2ozoxGcoDv1Iou9NAeDZB/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סוכרים 2 – אספקת אנרגיה לתאים", "u": "https://drive.google.com/file/d/1HGDfAFJqpx3iFq9xBsDMCBapcR3t0yZR/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סיכום סוכרים", "u": "https://drive.google.com/file/d/1eZqQWzDpTlrPnnwi7gQlAt17ecyvpbMC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעורים 19-21 – חלבונים", "u": "https://drive.google.com/file/d/1ltUMIxeWCTZcCcIjRoEkXEtUtfuZDD9f/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "חלבונים", "u": "https://drive.google.com/file/d/1V-apzfywPr8fRl0MP4XP1Rz3yPj0VVGg/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 22 – אנזימים", "u": "https://drive.google.com/file/d/1unvo5iRmfAiPes1yKuZcuTB0tBYMvDfW/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "אנזימים", "u": "https://drive.google.com/file/d/1PjIog5pyocI8goF_g6DD3VWFLZC2xdHI/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שומנים", "u": "https://drive.google.com/file/d/1wNsoxHSg7w4T3OkV62T3IB4r69SY0dg6/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "דף נוסחאות למבחן", "u": "https://drive.google.com/file/d/1mgDb3-dRMpSwHBxvwju_OIEgdM1sj6_T/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}], "hex": "#E0D2C2"}, {"id": "socio", "name": "מבוא לסוציולוגיה וסוציולוגיה של הגוף", "short": "סוציולוגיה", "tint": "powder", "lecturers": ["לב אסף"], "code": "92048", "folders": [["סוציולוגיה – מחזור ו", "https://drive.google.com/drive/folders/13lZcZk4HYt3Gt0xVlaQDCRf230wUCmHJ"], ["סוציולוגיה – ארכיון", "https://drive.google.com/drive/folders/1-IKwf8z9rSOaVSs5SJ4UWVthVsyh3RO7"]], "materials": [{"t": "סוציולוגיה – סיכום", "u": "https://drive.google.com/file/d/1AoSwckU0x6rS1moZ8CfqR-nITZp7WHMt/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום הקורס", "u": "https://drive.google.com/file/d/1CkKI3qD5sD_F1XWXTr8yFI6_3iNIbDYk/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "שיעור ראשון", "u": "https://drive.google.com/file/d/1WiEq-CpF_OMUgEqB_Fr2hkHnMOgk8cdR/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סוציאליזציה", "u": "https://drive.google.com/file/d/1CzhRt2dXjmHl3aBf7m9y7j6YSV-iWUF9/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "מגדר ומין", "u": "https://drive.google.com/file/d/1D-NG-aGaT4_bY-37fyZd_U43MVvmGn33/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "סוציולוגיה של כאב", "u": "https://drive.google.com/file/d/1Cs28jreymy2_-Y2IofNw034HDQA9uIBR/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "תיאוריות", "u": "https://drive.google.com/file/d/1Cp3sertzT6Z_mOQ6AkVykLR-hndJehit/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "סיכום מאמר: Cultural Competence and Diversity", "u": "https://drive.google.com/file/d/1Cqn9n5x4shcodSQoyj7Q9hCvqUIXTUX3/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "רשימת מושגים לקראת המבחן", "u": "https://drive.google.com/file/d/1uLTEoaADIKDG9McBufqUuoQRJpXcEefg/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "רשימת תיאוריות לקראת המבחן", "u": "https://drive.google.com/file/d/1nwiL8iglej2Ki98GtK_lOqO_z-93dYtO/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}], "hex": "#D3E8A1"}], "exams": [{"c": "chem", "moed": "א", "date": "2026-12-03", "time": "09:00", "room": "טרם נקבע"}, {"c": "exact", "moed": "א", "date": "2026-12-17", "time": "09:00", "room": "טרם נקבע"}, {"c": "english", "moed": "א", "date": "2027-02-01", "time": "09:00", "room": "טרם נקבע"}, {"c": "chem", "moed": "א", "date": "2027-02-04", "time": "09:00", "room": "טרם נקבע"}, {"c": "stats", "moed": "א", "date": "2027-02-08", "time": "09:00", "room": "טרם נקבע"}, {"c": "anat", "moed": "א", "date": "2027-02-11", "time": "09:00", "room": "טרם נקבע"}, {"c": "anat", "moed": "א", "date": "2027-02-14", "time": "09:00", "room": "טרם נקבע"}, {"c": "psych", "moed": "א", "date": "2027-02-17", "time": "16:30", "room": "טרם נקבע"}, {"c": "exact", "moed": "א", "date": "2027-02-22", "time": "09:00", "room": "טרם נקבע"}, {"c": "socio", "moed": "א", "date": "2027-03-03", "time": "09:00", "room": "טרם נקבע"}, {"c": "english", "moed": "ב", "date": "2027-03-07", "time": "09:00", "room": "טרם נקבע"}, {"c": "chem", "moed": "ב", "date": "2027-03-10", "time": "16:30", "room": "טרם נקבע"}, {"c": "stats", "moed": "ב", "date": "2027-03-15", "time": "16:30", "room": "טרם נקבע"}, {"c": "anat", "moed": "ב", "date": "2027-03-18", "time": "16:30", "room": "טרם נקבע"}, {"c": "anat", "moed": "ב", "date": "2027-03-21", "time": "16:30", "room": "טרם נקבע"}, {"c": "psych", "moed": "ב", "date": "2027-03-24", "time": "16:30", "room": "טרם נקבע"}, {"c": "exact", "moed": "ב", "date": "2027-03-28", "time": "09:00", "room": "טרם נקבע"}, {"c": "socio", "moed": "ב", "date": "2027-03-31", "time": "16:30", "room": "טרם נקבע"}], "sources": {"exams": "קובץ הבחינות מהידיעון", "drive": [["סיכומים וחומרי לימוד – מחזור ו", "https://drive.google.com/drive/folders/1gt4HB1DDiU6JyyMjLYeh46rEgTUgyI7h"], ["סיכומים שנה א' – ארכיון", "https://drive.google.com/drive/folders/1ynjkcgo_T24-WGrre6cFiggmjgYJiV0A"]]}}</script>
+<script id="data" type="application/json">{"updated": "2026-11-05", "semester": "שנה א' · סמסטר א' · תשפ״ז", "courses": [{"id": "exact", "name": "מבוא למדעים מדויקים – פיזיקה", "short": "מדעים מדויקים – פיזיקה", "tint": "sky", "lecturers": ["רוה אסנת", "מגן אסף"], "examName": "מבוא למדעים מדויקים ב'+ג' – פיסיקה", "code": "1767", "folders": [["פיזיקה – מחזור ו", "https://drive.google.com/drive/folders/1Bdp8wYTQp2TM0WGXABLT6fpoYlF_4IN9"]], "materials": [{"t": "יחסי מידות", "u": "https://drive.google.com/file/d/1Btq4Ruu8_gcln9KG11oeTmuxsGfMwc7z/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "הערות שיעור 26.11.2023", "u": "https://drive.google.com/file/d/1BlrxOmzBzDTQDy1yRnqx8pIhnLP1OTl4/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}], "hex": "#A6CEF0"}, {"id": "stats", "name": "סטטיסטיקה למקצועות הבריאות", "short": "סטטיסטיקה", "tint": "mint", "lecturers": ["ליבוביץ שי", "ברונר ליעד"], "code": "1885", "folders": [["סטטיסטיקה – מחזור ו", "https://drive.google.com/drive/folders/1BF8jbiH-_huASPBwS1iEK-jHRjyOI4V4"]], "materials": [{"t": "סיכום עד שיעור 4 כולל", "u": "https://drive.google.com/file/d/1BFgV4xT8YHhNAVfV7D5ate9RVGW4qqYt/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד 24.12 כולל", "u": "https://drive.google.com/file/d/1EYuWOfpRVbDwG9e5A0VhOxeD3mxBN5f7/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}], "hex": "#9CDAD3"}, {"id": "anat", "name": "אנטומיה א' – גו וגף עליון", "short": "אנטומיה א'", "tint": "sage", "lecturers": ["בין אלה", "ויסמן ענבל", "צייטלין לירון"], "code": "3748", "folders": [["אנטומיה – מחזור ו", "https://drive.google.com/drive/folders/1BLm6eDNU6E1ExffQ3SKWe3UOVajGGFBo"], ["אנטומיה – ארכיון", "https://drive.google.com/drive/folders/1-AcTEMATIUf4xmYgKQn5aaIJmH0gnioU"]], "materials": [{"t": "סיכום כל החומר – יובל פדר", "u": "https://drive.google.com/file/d/1Fttxs7etH4JhazDpWdEJKdgCAgJQLKER/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום באנטומיה – לי הנס", "u": "https://drive.google.com/file/d/1Fdbt_5bRqF85qqvDf7vOZkSgAqTlno8M/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד 17.12 כולל – רוני", "u": "https://drive.google.com/file/d/1E_QAu_wJXrubCtopX0k8Ez-jCp9qs3pm/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום אנטומיה – הכל", "u": "https://drive.google.com/file/d/1kmzw5Hto8kUEG_xTTUHbek_NHG2l4hZs/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "סיכום לסיכום אנטומיה", "u": "https://drive.google.com/file/d/1HesMGOUkixRvaUg9_mjXaRfrpSw6-w8l/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "סיכום לבוחן אמצע 2", "u": "https://drive.google.com/file/d/1ZBFQoO4hgbnCsfNaHTscNq4oKWab0H5l/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "פתולוגיות למבחן – כל סמסטר א'", "u": "https://drive.google.com/file/d/14NaN_rMf6moMymUlB1WYP5vNU6AHmMj9/view", "x": "pdf", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "רמות ארגון – סוגי רקמות", "u": "https://drive.google.com/file/d/1BMrXVRD9j_h5XTK9KQtWLUQQYzGY9FBK/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "עצמות וסחוסים", "u": "https://drive.google.com/file/d/1BaEjiedUGlRmCvrv1o05cylU3W76WzVO/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "מערכת השרירים", "u": "https://drive.google.com/file/d/1vv0hNwERs1D0mozVQvGQS4YU8iANF6zk/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "מפרקים", "u": "https://drive.google.com/file/d/1HPCB7nHSCExCXxeUR1If7cRTHdp8_5Cs/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "מפרק הכתף (שיעור 18.12)", "u": "https://drive.google.com/file/d/1XE6gVqp8ksmfdbNl5PVPj7F7c77Ir7t-/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "עמוד השדרה", "u": "https://drive.google.com/file/d/1jc5lN_LCEPDK_vkfnKX-Yf0mXFkfqjUC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "Axilla – בית השחי", "u": "https://drive.google.com/file/d/1v6hkf6rdtvwK5xo1CcxZPcRwh4M-fp34/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "Axilla", "u": "https://drive.google.com/file/d/14QaR5jW9p3jzyh21WTi5k7kKzoK5_120/view", "x": "pdf", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "פתולוגיה של גף עליון ותחתון", "u": "https://drive.google.com/file/d/1Ek1U-GKJBnX5kDPq7SrYChJG_rKZPJOI/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מבואות", "u": "https://drive.google.com/file/d/1odLkLM1BU9oH2yQPGuORmWJ-t6nGlGLQ/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מערכות הגוף", "u": "https://drive.google.com/file/d/1l3zyAe4HOBWfJo9br_Q5NOOZZQ_cG_YA/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – רקמות", "u": "https://drive.google.com/file/d/11W0PQ-0G5ykPFbRFDxRj4Zj2J2DG2rUN/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – עצמות וסחוסים", "u": "https://drive.google.com/file/d/1m735ZgocD2Bs2fpm-KCNL1Vr4QGy6R0c/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מפרקים", "u": "https://drive.google.com/file/d/18K5qVUIF0D-r0Exeuh6dDfFWrg77sMC5/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – שרירים", "u": "https://drive.google.com/file/d/1wEDPCfaC5f7E205EJ16QxUJ7tsobetuI/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – עמוד השדרה", "u": "https://drive.google.com/file/d/1ljN9cDxxdzRVu2MLdczlzBYhQmppRxno/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – גף עליון: עצמות ושרירים", "u": "https://drive.google.com/file/d/1zA7fwk8k552h-YXQWVsxvn3vJXGP6HTb/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – האמה: עצמות, שרירים, עצבים", "u": "https://drive.google.com/file/d/1NN_A-i6gZk9gilviTrDX_Gp-TeaGK7y1/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – כף היד", "u": "https://drive.google.com/file/d/1u9lJR0o_igq1VckRNbMHaSiNfx1NazhD/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – Axilla", "u": "https://drive.google.com/file/d/1-NZC-8iZZa1YVj4AYu4w8jmFGu5QT_sV/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – גף תחתון", "u": "https://drive.google.com/file/d/1WSfFaNSEEAviBJ_AzB4RSrMJPbT1qdSm/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "טבלת שרירים – מאיה טפרמן", "u": "https://drive.google.com/file/d/1J005a4HIOGN0zFUnb1cXYFuRvq9Ano54/view", "x": "pdf", "s": "מחזור ו", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירים – חגורת הכתפיים", "u": "https://drive.google.com/file/d/12ny2qXVqqX9I4cmQ4MuW_ozvPTzU5-Ga/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירי אמה – מדור קדמי", "u": "https://drive.google.com/file/d/1SBMItDsdm5wsBEe0TYAJVLwN3aZHUHDI/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירי אמה – מדור אחורי", "u": "https://drive.google.com/file/d/1tT1HeTS49bhXJrABI-zhytAbxkQvRYkr/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "טבלת שרירים, סיכום מפרקים, אקסילה", "u": "https://drive.google.com/file/d/1FOQgM04oRrNpFW1gwRusI6sJrpcQsNn1/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "Muscles by Movement", "u": "https://drive.google.com/file/d/1ixPSg2SHjdYXA0oMJY4K4KAM4duUA6Ad/view", "x": "pdf", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "Complete Anatomy & Muscle and Motion", "u": "https://drive.google.com/file/d/1ELOPv0Tzbe_rGmRkR797bbKuTVGsayrV/view", "x": "docx", "s": "מחזור ו", "c": "טבלאות ודפי עזר"}, {"t": "חוברת שחזורים תשפ״ב", "u": "https://drive.google.com/file/d/1-THijuFhL6GJ4V-JOzwXVq0dUl8gvMAf/view", "x": "pdf", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שחזור אנטומיה", "u": "https://drive.google.com/file/d/1FTvsMjk8zelDph3zuVo-yyShc6C-fB4c/view", "x": "doc", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שחזורים באנטומיה", "u": "https://drive.google.com/file/d/1OHM51vMjsnH_SLwSCiM35rzIu_0CAyu8/view", "x": "rtf", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "בחן זיהוי מבנים #1", "u": "https://drive.google.com/file/d/109fTMmdVlwAS1zlfIQ6kNq9S0p7404ux/view", "x": "pptx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "בחן זיהוי מבנים #2", "u": "https://drive.google.com/file/d/105jFIl80LVNLbZ4rmT7_5PLk01LIBmDB/view", "x": "pptx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תרגיל – חזרה למבחן זיהוי", "u": "https://drive.google.com/file/d/1cyrmxgI-9R7aqSjwFxgSSIR6-4O67EwW/view", "x": "pptx", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות לדוגמא – מבחן מסכם (1)", "u": "https://drive.google.com/file/d/1Fa9ZkduznFjHUITQ_E8qzJp8Nb9DXi4J/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות לדוגמא – מבחן מסכם (2)", "u": "https://drive.google.com/file/d/1CgAXH1LbEmGPzZTqUw3mmApDodG9jeZI/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "מבחן לדוגמא 2", "u": "https://drive.google.com/file/d/1MEnlSynBNbuCarLSgM3NjDAf1thW6aed/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תרגול למבחן באנטומיה", "u": "https://drive.google.com/file/d/1VOVgFTIXU1k7kl1PV5xedBP0Fq3_fCMi/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תרגול מבחן – שנה א' ספורטתרפיה", "u": "https://drive.google.com/file/d/1FxpG9zMdL1jZkZZIyEBkplc_FxpOslve/view", "x": "docx", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות תרגול – אוניברסיטת ת\"א", "u": "https://drive.google.com/file/d/1FuDM4LE3Arr6PWmDbLDNXfBFL5ALvf0b/view", "x": "pdf", "s": "מחזור ו", "c": "מבחנים לדוגמא ושחזורים"}], "hex": "#A9DDB6"}, {"id": "anatintro", "name": "מבוא לאנטומיה", "short": "מבוא לאנטומיה", "tint": "seafoam", "lecturers": ["צייטלין לירון", "ויסמן ענבל", "גוטשלק יאיר נגה"], "folders": [["אנטומיה – מחזור ו", "https://drive.google.com/drive/folders/1BLm6eDNU6E1ExffQ3SKWe3UOVajGGFBo"]], "note": "אין בתיקיות תיקייה נפרדת לקורס. כאן נושאי המבוא מתוך תיקיית האנטומיה, ושאר החומר נמצא בעמוד של אנטומיה א'.", "materials": [{"t": "רמות ארגון – סוגי רקמות", "u": "https://drive.google.com/file/d/1BMrXVRD9j_h5XTK9KQtWLUQQYzGY9FBK/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "עצמות וסחוסים", "u": "https://drive.google.com/file/d/1BaEjiedUGlRmCvrv1o05cylU3W76WzVO/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מבואות", "u": "https://drive.google.com/file/d/1odLkLM1BU9oH2yQPGuORmWJ-t6nGlGLQ/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – מערכות הגוף", "u": "https://drive.google.com/file/d/1l3zyAe4HOBWfJo9br_Q5NOOZZQ_cG_YA/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "יפעת גרנות – רקמות", "u": "https://drive.google.com/file/d/11W0PQ-0G5ykPFbRFDxRj4Zj2J2DG2rUN/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}], "hex": "#F2E29B"}, {"id": "writing", "name": "כתיבה אקדמית", "short": "כתיבה אקדמית", "tint": "powder", "lecturers": ["לרנר ענת"], "folders": [], "materials": [], "note": "עוד אין חומרים לקורס הזה. יש לך סיכום או את הנחיות העבודה? שלחי ואוסיף.", "hex": "#DDB5EC"}, {"id": "psych", "name": "פסיכולוגיה (מבוא + התפתחותית)", "short": "פסיכולוגיה", "tint": "lilacblue", "lecturers": ["ארבל עידו"], "code": "4433", "folders": [["פסיכולוגיה – מחזור ו", "https://drive.google.com/drive/folders/1AtXTRS7fkPQtGk8dvhiy-i_rmHpsBVzp"], ["פסיכולוגיה – ארכיון", "https://drive.google.com/drive/folders/1-IgFcA_Dknvst_71V_4d5HZZ06P91Gw4"]], "materials": [{"t": "סיכום עד 11.12 כולל", "u": "https://drive.google.com/file/d/1B83G7RS_vMSyMEbOj2n4MvgPTzbv9nie/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד שיעור 18.12 כולל", "u": "https://drive.google.com/file/d/1EJWFvOxt33UMg8qhr-kj982Zvi6G5AAI/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום עד 25.12 כולל", "u": "https://drive.google.com/file/d/1EWQc98RUOqIKVBEr5Y7bybPBPwZE2Myt/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "מבוא לפסיכולוגיה – סיכום החומר", "u": "https://drive.google.com/file/d/1D8gVQjMo6J3Xr8AhTYinarIn4bcf0vmw/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "סיכום למבחן מסכם", "u": "https://drive.google.com/file/d/1D8Qj9_LH40HxhfvEOY0yk3PHlYVPwX3j/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "סיכום מבוא לפסיכולוגיה", "u": "https://drive.google.com/file/d/1oQtlJo3mwNM_n-Zaj9TveqYBzqfHIUD5/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "רשימת מושגים למבחן – עם הסברים", "u": "https://drive.google.com/file/d/1zee7J17_dEQ4AJsCC4JtCZiWzjbJ7qxD/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "מושגים למבחן", "u": "https://drive.google.com/file/d/1K6-rqlxYp_S2Pr_XUnQGfYiE7wfHoyQN/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "מבחן לדוגמא", "u": "https://drive.google.com/file/d/1DSuqa9ipbZ-zmeQr7Z36QYQTuwVXlyZD/view", "x": "docx", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "תשובות למבחן לדוגמא", "u": "https://drive.google.com/file/d/1DNgfXsbujFXw79wsmGuOygv9yS3PPllc/view", "x": "docx", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות ותשובות לדוגמא", "u": "https://drive.google.com/file/d/1DEIS27J82mAeLsnrBUJLhwT0yYQ-WUlZ/view", "x": "html", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות מבחן לדוגמא", "u": "https://drive.google.com/file/d/1DWe19p5-9jURZYgCjy0ss5HuUatOa1jl/view", "x": "docx", "s": "מחזור ה", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות חזרה למבחן", "u": "https://drive.google.com/file/d/1321Zi-rgy9-FiBGzsAeLmSZg0Chv1bmm/view", "x": "pdf", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות למבחן", "u": "https://drive.google.com/file/d/1tyG5_15N6f4zZD4vIi5_NkLYKMraws6v/view", "x": "docx", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}, {"t": "שאלות למבחן – חיזוקים ועונשים", "u": "https://drive.google.com/file/d/1KyPt-WWid-RbIsbV-2sWptjrFyrnajG9/view", "x": "docx", "s": "ארכיון", "c": "מבחנים לדוגמא ושחזורים"}], "hex": "#F3B4D2"}, {"id": "english", "name": "אנגלית מתקדמים א'", "short": "אנגלית מתקדמים", "tint": "sky", "hidden": true, "lecturers": ["וילבר קרול"], "code": "4959", "folders": [], "materials": [], "hex": "#F8C59B"}, {"id": "english_carol", "src": "english", "name": "אנגלית מתקדמים א' – קרול", "short": "אנגלית – קרול", "tint": "sky", "lecturers": ["וילבר קרול"], "code": "4959", "folders": [], "materials": [], "note": "הכיתה מחולקת לשתי קבוצות באותן שעות. השיעורים והמבחנים משותפים, ושיעורי הבית והעבודות כאן הם של הקבוצה של קרול.", "hex": "#F8C59B"}, {"id": "english_jerry", "src": "english", "name": "אנגלית מתקדמים א' – גרי", "short": "אנגלית – גרי", "tint": "sky", "lecturers": ["גרי"], "code": "4959", "folders": [], "materials": [], "note": "הכיתה מחולקת לשתי קבוצות באותן שעות. השיעורים והמבחנים משותפים, ושיעורי הבית והעבודות כאן הם של הקבוצה של גרי.", "hex": "#F8C59B"}, {"id": "english_basic", "name": "אנגלית בסיסי (מקוון)", "short": "אנגלית בסיסי", "tint": "sky", "hidden": true, "lecturers": [], "code": "2269", "folders": [], "materials": [], "hex": "#F8C59B"}, {"id": "sport", "name": "מבוא לספורט תרפיה", "short": "מבוא לספורט תרפיה", "tint": "mint", "lecturers": ["הרף אלמכיאס אפרת", "ויסמן ענבל"], "folders": [["מבוא למקצועות הבריאות – מחזור ו", "https://drive.google.com/drive/folders/1EFb_9tmpevVcfKOQmzennOmuXIgsnJvz"]], "note": "במחזור הקודם הקורס נקרא \"מבוא למקצועות הבריאות\".", "materials": [{"t": "דוח סיכום סיורים", "u": "https://drive.google.com/file/d/1EHPoOMkr7iGiqB0Yv5zV0_9J_PfU4bvL/view", "x": "docx", "s": "מחזור ו", "c": "סיכומים מלאים"}], "hex": "#C9D1D6"}, {"id": "chem", "name": "מבוא לכימיה וביוכימיה", "short": "כימיה", "tint": "seafoam", "lecturers": ["רוה אסנת", "גוטשלק יאיר נגה"], "code": "92047", "folders": [["כימיה וביוכימיה – מחזור ו", "https://drive.google.com/drive/folders/1Ap99bxjcRia2_DKtVlEe6y3ZBL4mpO3H"], ["כימיה – ארכיון", "https://drive.google.com/drive/folders/1-Af5Nvb2fA01wzJjgFuI7B8BeAyporVU"]], "materials": [{"t": "כימיה וביוכימיה – סיכום", "u": "https://drive.google.com/file/d/1F1H1ih78RcsmDHUjnsKzA6tNDCt5S9we/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "כימיה – סיכום", "u": "https://drive.google.com/file/d/1AphIU1Vxiv6GspyX1GnJmxfO0TIFh18x/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום מבוא לכימיה עד שיעור 4.12", "u": "https://drive.google.com/file/d/1BJxK-7pvPR2nqR9yQVOObFBs17KvgvU2/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "ביוכימיה – הגר וצחי", "u": "https://drive.google.com/file/d/1aYW1694tOK1qsOKjiilUdL4AJ9p-8oMf/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים מלאים"}, {"t": "כימיה – מצגות 1-3", "u": "https://drive.google.com/file/d/1C0uoxFLHNbhASXSV2opSKu81ElQ8eujv/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "מבנה האטום וקשרים", "u": "https://drive.google.com/file/d/1BtCoy1Q2rieoRTWNMm9FljS-PfMeTlqv/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "הסבר על שיעור 11.12", "u": "https://drive.google.com/file/d/1As37iMfTin3gcquImpNvfpeU9uPwV6Pw/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים לפי נושא"}, {"t": "שיעור 3", "u": "https://drive.google.com/file/d/1gOkyQj6qYFyzlSeoxUuCr5olUk-_vRLh/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "קשרים כימיים", "u": "https://drive.google.com/file/d/1f4D_jvsV9liQOL3Uizy4NJ91SFzObcBW/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 8 – נוסחאות מבנה", "u": "https://drive.google.com/file/d/16ClJaqLz432fdvnCinzUjHUfx0eqJvEB/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 9 – תכונות חומרים מולקולריים", "u": "https://drive.google.com/file/d/1r8KmuLWSqSkG8pr9UovxHQ20UIvPTyjC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 10 – קוטביות", "u": "https://drive.google.com/file/d/1JO7qu4I4tG9W1eqHLSfFWXhiQLPxGm0L/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 11 – קשרי ו.ד.ו וקשרי מימן", "u": "https://drive.google.com/file/d/1DGAeS6mXQ-wYqv80YcI3y2Taw0KcR7MC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 12 – תמיסות", "u": "https://drive.google.com/file/d/1N5PhBg9syxuJd4SPoStC7tDoTNikIjqI/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 13 – חומצות ובסיסים", "u": "https://drive.google.com/file/d/1xGsBEY8_WPmNsaL9oGKH8O5IxxFnylNa/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 14 – מבנה התא", "u": "https://drive.google.com/file/d/1_54eOyZqVqu72v6YHA7_VY3cBGY5hN7D/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "ביוכימיה – קרום ואברוני התא", "u": "https://drive.google.com/file/d/1cHjLUU4OSg9izJRDoSZp24XHa8u5Z8OV/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעורים 15-16 – סוכרים 1", "u": "https://drive.google.com/file/d/1gI3yYvpmt0GIpOXmgJJU4mM-wmLQsD9W/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעורים 17-18 – סוכרים 2", "u": "https://drive.google.com/file/d/16NDLRTy1rM4eSFskaibXS8MgcrDQiFbS/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סוכרים 1", "u": "https://drive.google.com/file/d/1pGkvDGpRpRI2ozoxGcoDv1Iou9NAeDZB/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סוכרים 2 – אספקת אנרגיה לתאים", "u": "https://drive.google.com/file/d/1HGDfAFJqpx3iFq9xBsDMCBapcR3t0yZR/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סיכום סוכרים", "u": "https://drive.google.com/file/d/1eZqQWzDpTlrPnnwi7gQlAt17ecyvpbMC/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעורים 19-21 – חלבונים", "u": "https://drive.google.com/file/d/1ltUMIxeWCTZcCcIjRoEkXEtUtfuZDD9f/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "חלבונים", "u": "https://drive.google.com/file/d/1V-apzfywPr8fRl0MP4XP1Rz3yPj0VVGg/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שיעור 22 – אנזימים", "u": "https://drive.google.com/file/d/1unvo5iRmfAiPes1yKuZcuTB0tBYMvDfW/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "אנזימים", "u": "https://drive.google.com/file/d/1PjIog5pyocI8goF_g6DD3VWFLZC2xdHI/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "שומנים", "u": "https://drive.google.com/file/d/1wNsoxHSg7w4T3OkV62T3IB4r69SY0dg6/view", "x": "pdf", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "דף נוסחאות למבחן", "u": "https://drive.google.com/file/d/1mgDb3-dRMpSwHBxvwju_OIEgdM1sj6_T/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}], "hex": "#E0D2C2"}, {"id": "socio", "name": "מבוא לסוציולוגיה וסוציולוגיה של הגוף", "short": "סוציולוגיה", "tint": "powder", "lecturers": ["לב אסף"], "code": "92048", "folders": [["סוציולוגיה – מחזור ו", "https://drive.google.com/drive/folders/13lZcZk4HYt3Gt0xVlaQDCRf230wUCmHJ"], ["סוציולוגיה – ארכיון", "https://drive.google.com/drive/folders/1-IKwf8z9rSOaVSs5SJ4UWVthVsyh3RO7"]], "materials": [{"t": "סוציולוגיה – סיכום", "u": "https://drive.google.com/file/d/1AoSwckU0x6rS1moZ8CfqR-nITZp7WHMt/view", "x": "pdf", "s": "מחזור ו", "c": "סיכומים מלאים"}, {"t": "סיכום הקורס", "u": "https://drive.google.com/file/d/1CkKI3qD5sD_F1XWXTr8yFI6_3iNIbDYk/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים מלאים"}, {"t": "שיעור ראשון", "u": "https://drive.google.com/file/d/1WiEq-CpF_OMUgEqB_Fr2hkHnMOgk8cdR/view", "x": "docx", "s": "ארכיון", "c": "סיכומים לפי נושא"}, {"t": "סוציאליזציה", "u": "https://drive.google.com/file/d/1CzhRt2dXjmHl3aBf7m9y7j6YSV-iWUF9/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "מגדר ומין", "u": "https://drive.google.com/file/d/1D-NG-aGaT4_bY-37fyZd_U43MVvmGn33/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "סוציולוגיה של כאב", "u": "https://drive.google.com/file/d/1Cs28jreymy2_-Y2IofNw034HDQA9uIBR/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "תיאוריות", "u": "https://drive.google.com/file/d/1Cp3sertzT6Z_mOQ6AkVykLR-hndJehit/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "סיכום מאמר: Cultural Competence and Diversity", "u": "https://drive.google.com/file/d/1Cqn9n5x4shcodSQoyj7Q9hCvqUIXTUX3/view", "x": "docx", "s": "מחזור ה", "c": "סיכומים לפי נושא"}, {"t": "רשימת מושגים לקראת המבחן", "u": "https://drive.google.com/file/d/1uLTEoaADIKDG9McBufqUuoQRJpXcEefg/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}, {"t": "רשימת תיאוריות לקראת המבחן", "u": "https://drive.google.com/file/d/1nwiL8iglej2Ki98GtK_lOqO_z-93dYtO/view", "x": "docx", "s": "ארכיון", "c": "טבלאות ודפי עזר"}], "hex": "#D3E8A1"}], "exams": [{"c": "chem", "moed": "א", "date": "2026-12-03", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "ביניים"}, {"c": "exact", "moed": "א", "date": "2026-12-17", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "ביניים"}, {"c": "english", "moed": "א", "date": "2027-02-01", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "chem", "moed": "א", "date": "2027-02-04", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "stats", "moed": "א", "date": "2027-02-08", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "anat", "moed": "א", "date": "2027-02-11", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מעשי"}, {"c": "anat", "moed": "א", "date": "2027-02-14", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "psych", "moed": "א", "date": "2027-02-17", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "exact", "moed": "א", "date": "2027-02-22", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "socio", "moed": "א", "date": "2027-03-03", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "english", "moed": "ב", "date": "2027-03-07", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "chem", "moed": "ב", "date": "2027-03-10", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "stats", "moed": "ב", "date": "2027-03-15", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "anat", "moed": "ב", "date": "2027-03-18", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מעשי"}, {"c": "anat", "moed": "ב", "date": "2027-03-21", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "psych", "moed": "ב", "date": "2027-03-24", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "exact", "moed": "ב", "date": "2027-03-28", "time": "09:00", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "socio", "moed": "ב", "date": "2027-03-31", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "english_basic", "moed": "א", "date": "2027-01-25", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "english_basic", "moed": "ב", "date": "2027-02-16", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}, {"c": "english_basic", "moed": "ג", "date": "2027-03-09", "time": "16:30", "end": "", "room": "טרם נקבע", "kind": "מסכם"}], "sources": {"exams": "לוח הבחינות בידיעון", "drive": [["סיכומים וחומרי לימוד – מחזור ו", "https://drive.google.com/drive/folders/1gt4HB1DDiU6JyyMjLYeh46rEgTUgyI7h"], ["סיכומים שנה א' – ארכיון", "https://drive.google.com/drive/folders/1ynjkcgo_T24-WGrre6cFiggmjgYJiV0A"]]}}</script>
 <script>
 const DATA = JSON.parse(document.getElementById('data').textContent);
 const TINTS = {
@@ -263,9 +320,13 @@ const store = {
   set(k, v){ try{ localStorage.setItem('ss1:'+k, JSON.stringify(v)); }catch(_){} }
 };
 const byId = id => DATA.courses.find(c => c.id === id);
+const VIS = DATA.courses.filter(c => !c.hidden);
+const groupsOf = id => DATA.courses.filter(c => c.src === id);
+// does item course `id` belong to course page `c`?
+const forCourse = (id, c) => id === c.id || (c.src && id === c.src);
 const mix = (a, b, w) => { const h = x => [1,3,5].map(i => parseInt(x.slice(i,i+2),16)); const A = h(a), B = h(b);
   return '#' + A.map((v,i) => Math.round(v*(1-w) + B[i]*w).toString(16).padStart(2,'0')).join(''); };
-const tintVars = c => { if (c.hex) return `--tint:${mix(c.hex,'#ffffff',0.45)};--tint-ink:${mix(c.hex,'#1e2a2a',0.72)};--tint-dot:${c.hex}`;
+const tintVars = c => { if (c.hex) return `--tint:${mix(c.hex,'#ffffff',0.45)};--tint-soft:${mix(c.hex,'#ffffff',0.72)};--tint-ink:${mix(c.hex,'#1e2a2a',0.72)};--tint-dot:${c.hex};--tint-deep:${mix(c.hex,'#1e2a2a',0.66)}`;
   const t = TINTS[c.tint] || TINTS.sky; return `--tint:${t.bg};--tint-ink:${t.ink};--tint-dot:${t.dot}`; };
 const DAYS = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
 const MONTHS = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
@@ -277,18 +338,21 @@ const longDate = d => { const x = toDate(d); return 'יום ' + DAYS[x.getDay()]
 const daysLabel = n => n < 0 ? 'עבר' : n === 0 ? 'היום!' : n === 1 ? 'מחר' : 'עוד ' + n + ' ימים';
 const pad = n => String(n).padStart(2,'0');
 
-function myIds(){ const v = store.get('mine', null); return Array.isArray(v) && v.length ? v : DATA.courses.map(c => c.id); }
-const myCourses = () => DATA.courses.filter(c => myIds().includes(c.id));
-const isMine = id => myIds().includes(id);
-const examsSorted = () => DATA.exams.slice().sort((a,b) => (a.date+a.time).localeCompare(b.date+b.time));
+function myIds(){ const v = store.get('mine', null); return Array.isArray(v) && v.length ? v : VIS.map(c => c.id); }
+const myCourses = () => VIS.filter(c => myIds().includes(c.id));
+const isMine = id => { const g = groupsOf(id); return g.length ? g.some(x => myIds().includes(x.id)) : myIds().includes(id); };
+// a course id that can be shown to the user (a hidden parent → the user's group, if any)
+const shown = id => { const g = groupsOf(id); if (!g.length) return byId(id); return g.find(x => myIds().includes(x.id)) || byId(id); };
+const examsSorted = () => (LIVE.exams && LIVE.exams.length ? LIVE.exams : DATA.exams).filter(e => byId(e.c)).slice().sort((a,b) => (a.date+a.time).localeCompare(b.date+b.time));
+const kindLabel = e => e.kind && e.kind !== 'מסכם' ? 'מבחן ' + e.kind : 'מבחן';
 const examTitle = e => { const c = byId(e.c); return c.short; };
 const doneSet = () => new Set(store.get('done', []));
 function progress(c){ const d = doneSet(); const n = c.materials.length; const k = c.materials.filter(m => d.has(m.u)).length; return { n, k, p: n ? Math.round(k*100/n) : 0 }; }
 
 function calUrl(e){
-  const c = byId(e.c); const s = toDate(e.date, e.time); const end = new Date(s.getTime() + 3*3600e3);
+  const c = shown(e.c); const s = toDate(e.date, e.time); const end = e.end ? toDate(e.date, e.end) : new Date(s.getTime() + 3*3600e3);
   const f = x => x.getFullYear()+pad(x.getMonth()+1)+pad(x.getDate())+'T'+pad(x.getHours())+pad(x.getMinutes())+'00';
-  const p = new URLSearchParams({ action:'TEMPLATE', text:'מבחן ' + c.name + ' – מועד ' + e.moed + "'",
+  const p = new URLSearchParams({ action:'TEMPLATE', text: kindLabel(e) + ' ' + c.name + ' – מועד ' + e.moed + "'",
     dates: f(s)+'/'+f(end), ctz:'Asia/Jerusalem',
     details:'מועד ' + e.moed + "' · חדר: " + e.room + '\nמקור: ' + DATA.sources.exams + '\nמומלץ להוסיף תזכורת שבוע לפני.' });
   return 'https://calendar.google.com/calendar/render?' + p.toString();
@@ -297,18 +361,23 @@ const ICON = {
   cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 13v5M9.5 15.5h5"/></svg>',
   check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
   folder:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  exam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l3 3v15H5V3z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg>',
+  grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M9 9v12M15 9v12"/></svg>',
+  list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>',
   ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'
 };
 
 function examRow(e, opts={}){
-  const c = byId(e.c); const n = daysTo(e.date);
+  const c = shown(e.c); const n = daysTo(e.date);
   const cls = n < 0 ? 'past' : n <= 7 ? 'near' : '';
   const x = toDate(e.date);
-  return `<div class="exam${n<0?' past':''}" style="${tintVars(c)}">
+  return `<div class="exam tinted${n<0?' past':''}" style="${tintVars(c)}">
     <div class="date"><b>${x.getDate()}</b><span>${MONTHS[x.getMonth()].slice(0,3)}׳</span></div>
     <div class="body">
+      <div class="kind">${kindLabel(e)} · מועד ${e.moed}'</div>
       <a class="name" href="#c-${c.id}" style="text-decoration:none">${esc(opts.full ? c.name : c.short)}</a>
-      <div class="sub">יום ${DAYS[x.getDay()]} · ${e.time} · מועד ${e.moed}'${opts.crunch ? ` · <span class="crunch">${opts.crunch}</span>` : ''}</div>
+      <div class="sub">יום ${DAYS[x.getDay()]} · ${e.time}${e.room && e.room !== 'טרם נקבע' ? ' · ' + esc(e.room) : ''}${opts.crunch ? ` · <span class="crunch">${opts.crunch}</span>` : ''}</div>
     </div>
     <div class="side"><span class="days ${cls}">${daysLabel(n)}</span>
       ${n >= 0 ? `<a class="cal" href="${esc(calUrl(e))}" target="_blank" rel="noopener">${ICON.cal}ליומן</a>` : ''}</div>
@@ -317,7 +386,7 @@ function examRow(e, opts={}){
 
 /* ---------- live data from the Google Sheet ---------- */
 const SHEET_ID = "1arc7EL5LwQw5zR0ZDuo5CroiIvkoVIrkPhJCWj2A6KQ";
-const LIVE = Object.assign({ tasks: [], schedule: [], classes: [], at: 0, state: 'idle' }, store.get('live', {}));
+const LIVE = Object.assign({ tasks: [], schedule: [], classes: [], exams: [], at: 0, state: 'idle' }, store.get('live', {}));
 LIVE.state = 'idle';
 const sheetReady = () => SHEET_ID && !SHEET_ID.startsWith('__');
 
@@ -348,6 +417,7 @@ function cellVal(c){
   if (typeof v === 'number' && c.f) return String(c.f).trim();
   return String(v).trim();
 }
+const hasCols = (table, ...names) => { const l = table.cols.map(c => (c.label || '').trim()); return names.every(n => l.includes(n)); };
 function sheetRows(table){
   let cols = table.cols.map(c => (c.label || '').trim());
   let rows = table.rows.map(r => (r.c || []).map(cellVal));
@@ -376,7 +446,7 @@ function normTime(s){ const m = String(s||'').match(/^(\d{1,2})[:.](\d{2})/); re
 function courseFrom(name){
   const n = String(name||'').replace(/[׳']/g,"'").trim(); if (!n) return null;
   return DATA.courses.find(c => c.name === n || c.short === n || c.id === n)
-      || DATA.courses.find(c => c.name.startsWith(n) || n.startsWith(c.short)) || null;
+      || DATA.courses.find(c => c.name.startsWith(n)) || DATA.courses.find(c => n.startsWith(c.short)) || null;
 }
 const TYPES = { 'שיעורי בית':'hw', 'עבודה':'work', 'בוחן':'quiz', 'הודעה':'msg' };
 const DAYIDX = { 'ראשון':0, 'שני':1, 'שלישי':2, 'רביעי':3, 'חמישי':4, 'שישי':5, 'שבת':6, 'א':0, 'ב':1, 'ג':2, 'ד':3, 'ה':4, 'ו':5 };
@@ -385,9 +455,10 @@ async function loadLive(){
   if (!sheetReady()) return;
   LIVE.state = 'loading'; paintSync();
   try{
-    const [rt, rs, rk] = await Promise.allSettled([gviz('משימות'), gviz('מערכת שעות'), gviz('מערכת מהמכללה')]);
-    if (rt.status !== 'fulfilled' && rs.status !== 'fulfilled' && rk.status !== 'fulfilled') throw new Error('sheet');
-    const t = rt.status === 'fulfilled' ? rt.value : null, s = rs.status === 'fulfilled' ? rs.value : null;
+    const [rt, rs, rk, rx] = await Promise.allSettled([gviz('משימות'), gviz('מערכת שעות'), gviz('מערכת מהמכללה'), gviz('מבחנים מהמכללה')]);
+    if (![rt, rs, rk, rx].some(r => r.status === 'fulfilled')) throw new Error('sheet');
+    const ok = (r, ...n) => r.status === 'fulfilled' && hasCols(r.value, ...n) ? r.value : null;
+    const t = ok(rt, 'קורס', 'כותרת'), s = ok(rs, 'יום', 'התחלה');
     if (t)     LIVE.tasks = sheetRows(t).map((r, i) => {
       const c = courseFrom(r['קורס']); const type = (r['סוג'] || 'שיעורי בית').trim();
       return { id: 'r' + i + ':' + (r['כותרת']||'') + (r['תאריך']||''), c: c ? c.id : null, type, k: TYPES[type] || 'hw',
@@ -399,13 +470,18 @@ async function loadLive(){
       return { c: c ? c.id : null, day: DAYIDX[d], start: normTime(r['התחלה']), end: normTime(r['סיום']),
         place: r['מיקום'] || '', link: /^https?:\/\//.test(r['קישור']||'') ? r['קישור'] : '' };
     }).filter(x => x.c && x.day != null && x.start);
-    if (rk.status === 'fulfilled') LIVE.classes = sheetRows(rk.value).map(r => {
+    if (ok(rk, 'מזהה', 'סוג', 'התחלה')) LIVE.classes = sheetRows(rk.value).map(r => {
       const c = byId(r['מזהה']) || courseFrom(r['קורס']);
       return { c: c ? c.id : null, title: r['כותרת'] || '', date: normDate(r['תאריך']), start: normTime(r['התחלה']),
         end: normTime(r['סיום']), place: r['מיקום'] || '', special: r['סוג'] === 'מיוחד' };
     }).filter(x => x.date);
+    if (ok(rx, 'מזהה', 'מועד')){ const ex = sheetRows(rx.value).map(r => {
+      const c = byId(r['מזהה']) || courseFrom(r['קורס']);
+      return { c: c ? c.id : null, moed: (r['מועד'] || 'א').replace(/['׳]/g,''), kind: r['סוג'] || 'מסכם', date: normDate(r['תאריך']),
+        time: normTime(r['התחלה']) || '09:00', end: normTime(r['סיום']), room: r['מיקום'] || 'טרם נקבע' };
+    }).filter(x => x.c && x.date); if (ex.length) LIVE.exams = ex; }
     LIVE.at = Date.now(); LIVE.state = 'ok';
-    store.set('live', { tasks: LIVE.tasks, schedule: LIVE.schedule, classes: LIVE.classes, at: LIVE.at });
+    store.set('live', { tasks: LIVE.tasks, schedule: LIVE.schedule, classes: LIVE.classes, exams: LIVE.exams, at: LIVE.at });
   }catch(e){ LIVE.state = 'error'; }
   const r = (location.hash||'').slice(1);
   if (r !== 'search' && r !== 'pick'){ const y = scrollY; render(); scrollTo(0, y); } else paintSync();
@@ -432,34 +508,45 @@ function slotNext(sl, now = new Date()){
   return null;
 }
 const lessons = () => LIVE.classes.filter(k => !k.special && k.c && k.start);
-const linkFor = cid => (LIVE.schedule.find(s => s.c === cid && s.link) || {}).link || '';
+const linkFor = cid => (LIVE.schedule.find(s => (s.c === cid || (byId(s.c) || {}).src === cid) && s.link) || {}).link || '';
 function lessonTimes(k){ const s = toDate(k.date, k.start); const e = k.end ? toDate(k.date, k.end) : new Date(s.getTime() + 90*6e4); return { s, e }; }
 function nextClass(onlyMine = true, cid = null){
   const now = new Date();
   if (lessons().length){
-    const n = lessons().filter(k => (!onlyMine || isMine(k.c)) && (!cid || k.c === cid))
+    const n = lessons().filter(k => (!onlyMine || isMine(k.c)) && (!cid || forCourse(k.c, byId(cid))))
       .map(k => ({ sl: { c: k.c, start: k.start, end: k.end, place: k.place, link: linkFor(k.c) }, ...lessonTimes(k) }))
       .filter(x => x.e > now).sort((a,b) => a.s - b.s)[0];
     return n || null;
   }
-  return LIVE.schedule.filter(sl => (!onlyMine || isMine(sl.c)) && (!cid || sl.c === cid))
+  return LIVE.schedule.filter(sl => (!onlyMine || isMine(sl.c)) && (!cid || forCourse(sl.c, byId(cid))))
     .map(sl => ({ sl, ...slotNext(sl, now) })).filter(x => x.s).sort((a,b) => a.s - b.s)[0] || null;
 }
 function classBanner(cid){
-  const n = nextClass(!cid, cid); if (!n) return '';
-  const c = byId(n.sl.c); const now = new Date(); const mins = Math.round((n.s - now)/6e4);
-  let k, t;
-  if (mins <= 0){ k = '<span class="pulse"></span>השיעור מתקיים עכשיו'; t = esc(c.short); }
-  else if (mins < 60){ k = 'השיעור מתחיל בעוד ' + mins + ' דקות'; t = esc(c.short); }
-  else if (mins < 24*60 && n.s.getDate() === now.getDate()){ const h = Math.floor(mins/60), m = mins%60;
-    k = 'השיעור הבא היום, בעוד ' + h + (h === 1 ? ' שעה' : ' שעות') + (m ? ' ו-' + m + ' דק׳' : ''); t = esc(c.short); }
-  else { k = 'השיעור הבא'; t = esc(c.short) + ' · יום ' + DAYS[n.s.getDay()]; }
+  const n = nextClass(!cid, cid);
+  if (!n){
+    if (cid || !sheetReady()) return '';
+    return `<section class="feature" style="--tint:#e4eef6;--tint-dot:#A6CEF0;--tint-ink:#3b6584;--tint-deep:#2e5574">
+      <div class="ficon">${ICON.clock}</div><div class="fbody"><div class="flabel">השיעור הבא</div>
+      <div class="fmeta">${LIVE.state === 'loading' ? 'טוען את המערכת…' : 'המערכת מהמכללה עוד לא נטענה. היא תופיע כאן אחרי הריצה הבאה של הסקריפט.'}</div></div></section>`;
+  }
+  const c = shown(n.sl.c); const now = new Date(); const mins = Math.round((n.s - now)/6e4);
+  const startIso = iso(n.s) + 'T' + pad(n.s.getHours()) + ':' + pad(n.s.getMinutes());
+  let when;
+  if (mins <= 0) when = '<span class="pulse"></span>מתקיים עכשיו';
+  else if (n.s.getDate() === now.getDate() && mins < 24*60) when = 'היום';
+  else if (mins < 48*60 && new Date(now.getTime() + 864e5).getDate() === n.s.getDate()) when = 'מחר, יום ' + DAYS[n.s.getDay()];
+  else when = 'יום ' + DAYS[n.s.getDay()] + ' ' + n.s.getDate() + '.' + (n.s.getMonth()+1);
   const live = mins < 60;
-  return `<div class="live${mins <= 0 ? ' now' : ''}" style="${tintVars(c)}">
-    <div><div class="k">${k}</div><div class="t">${t}</div>
-      <div class="s"><span dir="ltr">${n.sl.start}${n.sl.end ? '–' + n.sl.end : ''}</span>${n.sl.place ? ' · ' + esc(n.sl.place) : ''}</div></div>
+  return `<section class="feature" style="${tintVars(c)}">
+    <div class="ficon">${ICON.clock}</div>
+    <div class="fbody">
+      <div class="flabel">${mins <= 0 ? 'השיעור עכשיו' : 'השיעור הבא'}</div>
+      <a class="ftitle" href="#c-${c.id}">${esc(c.short)}</a>
+      <div class="fmeta"><b>${when}</b> · <span dir="ltr">${n.sl.start}${n.sl.end ? '–' + n.sl.end : ''}</span>${n.sl.place ? ' · ' + esc(n.sl.place) : ''}</div>
+      ${mins > 0 ? `<div class="cdl">מתחיל בעוד</div><div class="count" data-at="${startIso}"></div>` : ''}
+    </div>
     ${n.sl.link ? `<a class="btn ${live ? 'primary' : 'soft'}" href="${esc(n.sl.link)}" target="_blank" rel="noopener">${/zoom/i.test(n.sl.link) ? 'כניסה לזום' : 'קישור לשיעור'}</a>` : ''}
-  </div>`;
+  </section>`;
 }
 function weekStart(){ const t = today0(); const d = t.getDay(); return new Date(t.getTime() - (d >= 5 ? d - 7 : d) * 864e5); }
 const iso = d => d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
@@ -478,12 +565,12 @@ function weekView(){
     const ws = weekStart(); const blocks = dayBlocks(ws, 6).filter(b => b.ls.length || b.sp.length);
     if (!blocks.length) return '';
     const td = iso(today0());
-    return `<h2>${ws > today0() ? 'השבוע הבא' : 'מערכת השבוע'} <a href="#schedule">כל המערכת</a></h2><div class="card week">${blocks.map(b => `<div class="d${b.ds === td ? ' today' : ''}"><b>${DAYS[b.d.getDay()]}<small style="display:block;font-weight:600;font-size:12px;color:var(--faint)">${b.d.getDate()}.${b.d.getMonth()+1}</small></b><div>${b.sp.map(k => `<span class="slot" style="background:#fbeceb;color:#8a4a45">${esc(k.title)}</span>`).join('')}${b.ls.map(k => { const c = byId(k.c) || {}; return `<a class="slot" href="#c-${k.c || ''}" style="${c.id ? tintVars(c) : ''}">${k.start} ${esc(c.short || k.title)}</a>`; }).join('')}</div></div>`).join('')}</div>`;
+    return `<h2>${ws > today0() ? 'השבוע הבא' : 'מערכת השבוע'} <a href="#schedule">כל המערכת</a></h2><div class="card week">${blocks.map(b => `<div class="d${b.ds === td ? ' today' : ''}"><b>${DAYS[b.d.getDay()]}<small style="display:block;font-weight:600;font-size:12px;color:var(--faint)">${b.d.getDate()}.${b.d.getMonth()+1}</small></b><div>${b.sp.map(k => `<span class="slot" style="background:#fbeceb;color:#8a4a45">${esc(k.title)}</span>`).join('')}${b.ls.map(k => { const c = shown(k.c) || {}; return `<a class="slot" href="#c-${k.c || ''}" style="${c.id ? tintVars(c) : ''}">${k.start} ${esc(c.short || k.title)}</a>`; }).join('')}</div></div>`).join('')}</div>`;
   }
   const mine = LIVE.schedule.filter(sl => isMine(sl.c)); if (!mine.length) return '';
   const td = new Date().getDay();
   const days = [0,1,2,3,4,5].map(d => ({ d, s: mine.filter(x => x.day === d).sort((a,b) => a.start.localeCompare(b.start)) })).filter(x => x.s.length);
-  return `<h2>מערכת השבוע</h2><div class="card week">${days.map(x => `<div class="d${x.d === td ? ' today' : ''}"><b>${DAYS[x.d]}</b><div>${x.s.map(sl => `<a class="slot" href="#c-${sl.c}" style="${tintVars(byId(sl.c))}">${sl.start} ${esc(byId(sl.c).short)}</a>`).join('')}</div></div>`).join('')}</div>`;
+  return `<h2>מערכת השבוע</h2><div class="card week">${days.map(x => `<div class="d${x.d === td ? ' today' : ''}"><b>${DAYS[x.d]}</b><div>${x.s.map(sl => `<a class="slot" href="#c-${shown(sl.c).id}" style="${tintVars(shown(sl.c))}">${sl.start} ${esc(shown(sl.c).short)}</a>`).join('')}</div></div>`).join('')}</div>`;
 }
 
 /* ---------- tasks ---------- */
@@ -497,7 +584,7 @@ function taskCal(t){
     text: t.type + (c ? ' – ' + c.short : '') + ': ' + t.title, dates: f(s)+'/'+f(e), ctz:'Asia/Jerusalem', details: t.det + (t.link ? '\n' + t.link : '') });
 }
 function taskRow(t, opts = {}){
-  const c = byId(t.c); const d = doneTasks().has(t.id); const n = t.date ? daysTo(t.date) : null;
+  const c = t.c ? shown(t.c) : null; const d = doneTasks().has(t.id); const n = t.date ? daysTo(t.date) : null;
   const due = t.date ? `${t.k === 'msg' ? '' : 'להגשה עד '}יום ${DAYS[toDate(t.date).getDay()]} ${shortDate(t.date)}${t.time ? ' · ' + t.time : ''}` : '';
   return `<div class="task${d ? ' done' : ''}" style="${c ? tintVars(c) : ''}">
     ${t.k !== 'msg' ? `<button class="tick" type="button" data-t="${esc(t.id)}" aria-pressed="${d}" aria-label="סימון: סיימתי">${ICON.check}</button>` : ''}
@@ -514,14 +601,51 @@ function taskRow(t, opts = {}){
 }
 const sortTasks = l => l.slice().sort((a,b) => (a.date||'9999').localeCompare(b.date||'9999') || (a.time||'').localeCompare(b.time||''));
 
+let weekOff = 0;
 function scheduleView(){
   if (!LIVE.classes.length) return `<main class="wrap"><h1>מערכת שעות</h1><div class="card empty">המערכת מהמכללה עוד לא נטענה. היא מתעדכנת אוטומטית כל שעה.</div>${syncLine()}</main>`;
+  const mode = store.get('schedMode', 'week');
+  const seg = `<div class="seg"><button type="button" data-mode="week" aria-pressed="${mode==='week'}">טבלה שבועית</button><button type="button" data-mode="list" aria-pressed="${mode==='list'}">רשימה</button></div>`;
+  const head = `<h1>מערכת שעות</h1><p class="lead">מתעדכנת אוטומטית מהידיעון של המכללה, בערך פעם בשעה.</p>`;
+  if (mode === 'week'){
+    const ws = new Date(weekStart().getTime() + weekOff*7*864e5);
+    const days = dayBlocks(ws, 6);
+    const all = days.flatMap(d => d.ls);
+    const mins = t => { const [h,m] = t.split(':').map(Number); return h*60+m; };
+    let lo = 8*60, hi = 17*60;
+    all.forEach(k => { lo = Math.min(lo, Math.floor(mins(k.start)/60)*60); hi = Math.max(hi, Math.ceil(mins(k.end || k.start)/60)*60 + (k.end ? 0 : 90)); });
+    const PH = 54, H = (hi - lo) / 60 * PH; const td = iso(today0());
+    const hours = []; for (let t = lo; t <= hi; t += 60) hours.push(t);
+    const col = d => {
+      const ls = d.ls.slice().sort((a,b) => a.start.localeCompare(b.start));
+      const lanes = []; ls.forEach(k => { const s0 = mins(k.start), e0 = mins(k.end || k.start) || s0 + 90; let i = lanes.findIndex(x => x <= s0); if (i < 0){ i = lanes.length; lanes.push(0); } lanes[i] = e0; k._lane = i; k._s = s0; k._e = e0; });
+      const L = Math.max(1, lanes.length);
+      return `<div class="gcol${d.ds === td ? ' today' : ''}">
+        <div class="ghead"><b>${DAYS[d.d.getDay()]}</b><span>${d.d.getDate()}.${d.d.getMonth()+1}</span></div>
+        ${d.sp.length ? `<div class="gsp">${d.sp.map(k => esc(k.title)).join(' · ')}</div>` : '<div class="gsp empty"></div>'}
+        <div class="gbody" style="height:${H}px">${hours.slice(0,-1).map((t,i) => `<i class="gl" style="top:${i*PH}px"></i>`).join('')}
+          ${ls.map(k => { const c = shown(k.c) || {}; const top = (k._s - lo)/60*PH, h = Math.max(26, (k._e - k._s)/60*PH - 3);
+            return `<a class="gev" href="#c-${c.id || ''}" title="${esc(k.title)}" style="top:${top}px;height:${h}px;right:calc(${k._lane*100/L}% + 2px);width:calc(${100/L}% - 4px);${c.id ? tintVars(c) : ''}"><b>${esc(c.short || k.title)}</b><span dir="ltr">${k.start}${k.end ? '–' + k.end : ''}</span>${k.place && h > 60 ? `<span>${esc(k.place)}</span>` : ''}</a>`; }).join('')}
+        </div></div>`;
+    };
+    const lbl = weekOff === 0 ? (ws > today0() ? 'השבוע הבא' : 'השבוע') : weekOff === 1 ? 'שבוע הבא' : weekOff === -1 ? 'שבוע שעבר' : '';
+    const end = new Date(ws.getTime() + 5*864e5);
+    return `<main class="wrap wide">${head}${seg}
+      <div class="wnav"><button type="button" data-wk="-1" aria-label="שבוע קודם">→</button>
+        <div><b>${lbl}</b> ${ws.getDate()}.${ws.getMonth()+1} – ${end.getDate()}.${end.getMonth()+1}</div>
+        <button type="button" data-wk="1" aria-label="שבוע הבא">←</button></div>
+      <div class="gwrap card"><div class="grid7">
+        <div class="gtimes"><div class="ghead"></div><div class="gsp empty"></div><div class="gbody" style="height:${H}px">${hours.map((t,i) => `<span style="top:${i*PH}px">${pad(t/60)}:00</span>`).join('')}</div></div>
+        ${days.map(col).join('')}
+      </div></div>
+      ${all.length ? '' : '<div class="card empty" style="margin-top:12px">אין שיעורים בשבוע הזה</div>'}
+      ${syncLine()}
+    </main>`;
+  }
   const span = store.get('span', 14);
   const blocks = dayBlocks(today0(), span).filter(b => b.ls.length || b.sp.length);
   const b = (v, l) => `<button type="button" data-span="${v}" aria-pressed="${span == v}">${l}</button>`;
-  return `<main class="wrap">
-    <h1>מערכת שעות</h1>
-    <p class="lead">מתעדכנת אוטומטית מהידיעון של המכללה, בערך פעם בשעה. השינויים של המכללה מופיעים כאן לבד.</p>
+  return `<main class="wrap">${head}${seg}
     <div class="seg">${b(7,'שבוע')}${b(14,'שבועיים')}${b(35,'חודש')}</div>
     ${blocks.map(x => `<h2>יום ${DAYS[x.d.getDay()]} · ${x.d.getDate()}.${x.d.getMonth()+1}${x.ds === iso(today0()) ? ' · היום' : ''}</h2>
       <div class="card list">${x.sp.map(k => `<div class="exam"><div class="body"><div class="name" style="color:#8a4a45">${esc(k.title)}</div></div></div>`).join('')}
@@ -530,7 +654,7 @@ function scheduleView(){
   </main>`;
 }
 function lessonRow(k, opts = {}){
-  const c = byId(k.c) || { short: k.title }; const { s, e } = lessonTimes(k); const now = new Date();
+  const c = shown(k.c) || { short: k.title }; const { s, e } = lessonTimes(k); const now = new Date();
   const live = now >= s && now < e;
   return `<div class="exam" style="${c.id ? tintVars(c) : ''}">
     <div class="date" style="width:64px"><b style="font-size:16px">${k.start}</b><span>${k.end ? 'עד ' + k.end : ''}</span></div>
@@ -569,16 +693,20 @@ function homeView(){
   const next = up[0];
   let hero = '';
   if (next){
-    const c = byId(next.c);
-    hero = `<section class="card hero" style="margin-top:18px">
-      <div><div class="k">המבחן הבא</div><div class="t">${esc(c.name)}</div>
-        <div class="meta">${longDate(next.date)} · ${next.time} · מועד ${next.moed}'</div></div>
-      <div class="row"><div class="count" id="count" data-at="${next.date}T${next.time}"></div>
-        <a class="btn primary" href="${esc(calUrl(next))}" target="_blank" rel="noopener">${ICON.cal}הוספה ליומן</a></div>
+    const c = shown(next.c);
+    hero = `<section class="feature exam-f" style="${tintVars(c)}">
+      <div class="ficon">${ICON.exam}</div>
+      <div class="fbody">
+        <div class="flabel">המבחן הבא${next.kind && next.kind !== 'מסכם' ? ' · ' + esc(kindLabel(next)) : ''}</div>
+        <a class="ftitle" href="#c-${c.id}">${esc(c.name)}</a>
+        <div class="fmeta"><b>${longDate(next.date)}</b> · ${next.time} · מועד ${next.moed}'</div>
+        <div class="cdl">בעוד</div><div class="count" data-at="${next.date}T${next.time}"></div>
+      </div>
+      <a class="btn soft" href="${esc(calUrl(next))}" target="_blank" rel="noopener">${ICON.cal}ליומן</a>
     </section>`;
   }
   const cards = mine.map(c => {
-    const pr = progress(c); const ne = examsSorted().find(e => e.c === c.id && daysTo(e.date) >= 0);
+    const pr = progress(c); const ne = examsSorted().find(e => forCourse(e.c, c) && daysTo(e.date) >= 0);
     return `<a class="card course" href="#c-${c.id}" style="${tintVars(c)}">
       <div><div class="n">${esc(c.name)}</div><div class="l">${esc(c.lecturers.join(' · '))}</div></div>
       <div class="f"><span>${c.materials.length ? `${c.materials.length} חומרים` : 'עוד אין חומרים'}</span>
@@ -588,10 +716,15 @@ function homeView(){
   return `<main class="wrap">
     <h1>היי 👋</h1>
     <p class="lead">${esc(DATA.semester)} · הכל במקום אחד: שיעורים, משימות, מבחנים וסיכומים.</p>
-    ${classBanner()}
+    <div class="features">${classBanner()}${hero}</div>
+    <nav class="quick">
+      <a href="#schedule" style="--q:#A6CEF0">${ICON.grid}<span>מערכת שעות</span></a>
+      <a href="#exams" style="--q:#F3B4D2">${ICON.exam}<span>לוח מבחנים</span></a>
+      <a href="#tasks" style="--q:#A9DDB6">${ICON.list}<span>משימות</span></a>
+      <a href="#plan" style="--q:#F2E29B">${ICON.check}<span>תכנון חזרה</span></a>
+    </nav>
     ${homeTasks()}
-    ${hero}
-    ${up.length > 1 ? `<h2>המבחנים הבאים <a href="#exams">כל הלוח</a></h2><div class="card list">${up.slice(1,5).map(e => examRow(e)).join('')}</div>` : ''}
+    ${up.length > 1 ? `<h2>המבחנים הבאים <a href="#exams">לוח מבחנים</a></h2><div class="card list">${up.slice(1,5).map(e => examRow(e)).join('')}</div>` : ''}
     ${weekView()}
     <h2>הקורסים שלי <a href="#pick">בחירת קורסים</a></h2>
     <div class="grid">${cards}</div>
@@ -627,12 +760,13 @@ function examsView(){
   const b = (v, l, k, cur) => `<button type="button" data-${k}="${v}" aria-pressed="${cur === v}">${l}</button>`;
   return `<main class="wrap">
     <h1>לוח מבחנים</h1>
-    <p class="lead">מקור: ${esc(DATA.sources.exams)}. החדרים עוד לא נקבעו. על מועד חשוב תמיד כדאי לבדוק גם במודל.</p>
-    <div class="seg" id="ef">${b('all','הכל','f',filt)}${b('א',"מועד א'",'f',filt)}${b('ב',"מועד ב'",'f',filt)}
+    <p class="lead">${LIVE.exams && LIVE.exams.length ? 'מתעדכן אוטומטית מהידיעון של המכללה, בערך פעם בשעה.' : 'מקור: ' + esc(DATA.sources.exams) + '.'} כל מבחן בצבע של הקורס. על מועד חשוב תמיד כדאי לבדוק גם בידיעון.</p>
+    <div class="seg" id="ef">${b('all','הכל','f',filt)}${b('א',"מועד א'",'f',filt)}${b('ב',"מועד ב'",'f',filt)}${examsSorted().some(e => e.moed === 'ג') ? b('ג',"מועד ג'",'f',filt) : ''}
       <button type="button" data-mine="1" aria-pressed="${onlyMine}">רק הקורסים שלי</button>
       ${past ? `<button type="button" data-past="1" aria-pressed="${showPast}">להציג מבחנים שעברו (${past})</button>` : ''}</div>
     ${Object.keys(groups).length ? Object.entries(groups).map(([k,v]) => `<h2>${k}</h2><div class="card list">${v.join('')}</div>`).join('') : '<div class="card empty">אין מבחנים להצגה</div>'}
-    ${DATA.courses.filter(c => !DATA.exams.some(e => e.c === c.id)).length ? `<div class="note">בלי מבחן בלוח: ${DATA.courses.filter(c => !DATA.exams.some(e => e.c === c.id)).map(c => esc(c.short)).join(', ')}. ייתכן שיש בהם עבודה או הגשה במקום מבחן.</div>` : ''}
+    ${(() => { const no = VIS.filter(c => !examsSorted().some(e => forCourse(e.c, c))); return no.length ? `<div class="note">בלי מבחן בלוח: ${no.map(c => esc(c.short)).join(', ')}. ייתכן שיש בהם עבודה או הגשה במקום מבחן.</div>` : ''; })()}
+    ${syncLine()}
     ${footer()}
   </main>`;
 }
@@ -648,13 +782,13 @@ function planView(){
     const a = Math.min(span[0], today0()), z = +span[1] + 864e5*3; const pos = d => ((+d - a) / (z - a)) * 100;
     const months = []; const m0 = new Date(a); m0.setDate(1); m0.setMonth(m0.getMonth()+1);
     for (let d = new Date(m0); d <= z; d.setMonth(d.getMonth()+1)) months.push(`<span class="mo" style="right:${pos(d)}%">${MONTHS[d.getMonth()]}</span>`);
-    const pts = all.filter(e => e.moed === 'א').map(e => `<span class="pt" title="${esc(byId(e.c).short)} ${shortDate(e.date)}" style="right:${pos(toDate(e.date))}%;${tintVars(byId(e.c))}"></span>`).join('');
-    const used = [...new Set(all.filter(e => e.moed === 'א').map(e => e.c))].map(id => byId(id));
+    const pts = all.filter(e => e.moed === 'א').map(e => `<span class="pt" title="${esc(shown(e.c).short)} ${shortDate(e.date)}" style="right:${pos(toDate(e.date))}%;${tintVars(shown(e.c))}"></span>`).join('');
+    const used = [...new Set(all.filter(e => e.moed === 'א').map(e => shown(e.c).id))].map(id => byId(id));
     tl = `<div class="card"><div class="timeline"><div class="tl"><div class="axis"></div>${months.join('')}<span class="today" style="right:${pos(today0())}%"></span>${pts}</div></div>
       <div class="legend">${used.map(c => `<span style="${tintVars(c)}"><i class="dot"></i>${esc(c.short)}</span>`).join('')}</div></div>`;
   }
   const rows = ups.map(e => {
-    const c = byId(e.c); const n = daysTo(e.date); const start = new Date(toDate(e.date) - lead*864e5);
+    const c = shown(e.c); const n = daysTo(e.date); const start = new Date(toDate(e.date) - lead*864e5);
     const s = Math.round((start - today0())/864e5); const pr = progress(c);
     const go = s > 0 ? `להתחיל חזרה בעוד ${s} ימים (${start.getDate()}.${start.getMonth()+1})` : 'הגיע הזמן להתחיל חזרה';
     return `<div class="plan" style="${tintVars(c)}">
@@ -689,9 +823,9 @@ function runSearch(){
   const terms = q.toLowerCase().split(/\s+/);
   const hit = s => terms.every(t => s.toLowerCase().includes(t));
   const hl = s => { let r = esc(s); terms.forEach(t => { if (t) r = r.replace(new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi'), m => '<mark>'+m+'</mark>'); }); return r; };
-  const cs = DATA.courses.filter(c => hit(c.name + ' ' + c.lecturers.join(' ')));
+  const cs = VIS.filter(c => hit(c.name + ' ' + c.lecturers.join(' ')));
   const ms = []; const seen = new Set();
-  DATA.courses.forEach(c => c.materials.forEach(m => { const k = c.id+m.u; if (!seen.has(k) && hit(m.t + ' ' + c.short + ' ' + m.c)) { seen.add(k); ms.push([c,m]); } }));
+  VIS.forEach(c => c.materials.forEach(m => { const k = c.id+m.u; if (!seen.has(k) && hit(m.t + ' ' + c.short + ' ' + m.c)) { seen.add(k); ms.push([c,m]); } }));
   const d = doneSet();
   box.innerHTML = (cs.length ? `<h2>קורסים</h2><div class="card list">${cs.map(c => `<a class="folder" href="#c-${c.id}" style="${tintVars(c)}"><i class="dot"></i>${hl(c.name)}<span class="muted" style="font-weight:400;font-size:14px">${hl(c.lecturers.join(' · '))}</span></a>`).join('')}</div>` : '')
     + `<h2>חומרים (${ms.length})</h2>` + (ms.length ? `<div class="card list">${ms.slice(0,80).map(([c,m]) => matRow(m, d, c)).join('')}</div>` : '<div class="card empty">לא נמצא. נסו מילה אחרת.</div>');
@@ -707,7 +841,7 @@ function matRow(m, d, course){
 }
 
 function courseView(c){
-  const ex = examsSorted().filter(e => e.c === c.id);
+  const ex = examsSorted().filter(e => forCourse(e.c, c));
   const cats = ['סיכומים מלאים','סיכומים לפי נושא','טבלאות ודפי עזר','מבחנים לדוגמא ושחזורים'];
   const sel = store.get('cat:'+c.id, 'all');
   const present = cats.filter(k => c.materials.some(m => m.c === k));
@@ -720,10 +854,10 @@ function courseView(c){
     </div></div></div>
   <main class="wrap" style="${tintVars(c)}">
     ${classBanner(c.id)}
-    ${(() => { const l = lessons().filter(k => k.c === c.id && lessonTimes(k).e > new Date()).slice(0, 4);
+    ${(() => { const l = lessons().filter(k => forCourse(k.c, c) && lessonTimes(k).e > new Date()).slice(0, 4);
       return l.length ? `<h2>השיעורים הבאים <a href="#schedule">כל המערכת</a></h2><div class="card list">${l.map(k => lessonRow(k, { date: true })).join('')}</div>` : ''; })()}
     ${c.note ? `<div class="note">${esc(c.note)}</div>` : ''}
-    ${(() => { const l = sortTasks(LIVE.tasks.filter(t => t.c === c.id && (t.k === 'msg' || !t.date || daysTo(t.date) >= -3)));
+    ${(() => { const l = sortTasks(LIVE.tasks.filter(t => forCourse(t.c, c) && (t.k === 'msg' || !t.date || daysTo(t.date) >= -3)));
       return l.length ? `<h2>שיעורי בית, עבודות והודעות</h2><div class="card list">${l.map(t => taskRow(t, { noCourse: true })).join('')}</div>` : ''; })()}
     <h2>מבחנים</h2>
     ${ex.length ? `<div class="card list">${ex.map(e => examRow(e)).join('')}</div>` : '<div class="card empty">אין מבחן בלוח הבחינות</div>'}
@@ -738,7 +872,7 @@ function courseView(c){
     <div class="card missing">
       ${c.code ? `<div><b>מספר קורס</b><span style="color:var(--ink)">${esc(c.code)}</span></div>` : ''}
       ${(() => { let sl = LIVE.schedule.filter(s => s.c === c.id);
-        if (!sl.length){ const seen = {}; lessons().filter(k => k.c === c.id && daysTo(k.date) >= 0 && daysTo(k.date) < 14).forEach(k => {
+        if (!sl.length){ const seen = {}; lessons().filter(k => forCourse(k.c, c) && daysTo(k.date) >= 0 && daysTo(k.date) < 14).forEach(k => {
           const d = toDate(k.date).getDay(); const key = d + k.start; if (!seen[key]) seen[key] = { c: c.id, day: d, start: k.start, end: k.end, place: k.place, link: '' }; });
           sl = Object.values(seen).sort((x,y) => x.day - y.day || x.start.localeCompare(y.start)); }
         return `<div><b>מועד השיעור</b>${sl.length ? `<span style="color:var(--ink)">${sl.map(s => 'יום ' + DAYS[s.day] + ' <span dir="ltr">' + s.start + (s.end ? '–' + s.end : '') + '</span>' + (s.place ? ' · ' + esc(s.place) : '')).join('<br>')}</span>` : '<span>עוד לא נוסף</span>'}</div>
@@ -753,7 +887,7 @@ function pickView(){
   return `<main class="wrap">
     <h1>הקורסים שלי</h1>
     <p class="lead">מה שתבחרי יופיע במסך הבית, בלוח המבחנים ובתכנון החזרה. הבחירה נשמרת רק במכשיר הזה.</p>
-    <div class="card list pick" style="margin-top:16px">${DATA.courses.map(c => `<label style="${tintVars(c)}"><input type="checkbox" value="${c.id}"${mine.includes(c.id)?' checked':''}><i class="dot"></i>${esc(c.name)}</label>`).join('')}</div>
+    <div class="card list pick" style="margin-top:16px">${VIS.map(c => `<label style="${tintVars(c)}"><input type="checkbox" value="${c.id}"${mine.includes(c.id)?' checked':''}><i class="dot"></i>${esc(c.name)}</label>`).join('')}</div>
     <p style="margin-top:16px"><a class="btn primary" href="#home">סיום</a></p>
   </main>`;
 }
@@ -768,10 +902,12 @@ function footer(){
 function drawer(route){
   const mine = myIds();
   const item = c => `<a href="#c-${c.id}" class="${route==='c-'+c.id?'on':''}" style="${tintVars(c)}"><i class="dot"></i>${esc(c.name)}</a>`;
-  const others = DATA.courses.filter(c => !mine.includes(c.id));
-  $('#drawer').innerHTML = `<h3>הקורסים שלי</h3>${DATA.courses.filter(c => mine.includes(c.id)).map(item).join('')}
+  const others = VIS.filter(c => !mine.includes(c.id));
+  $('#drawer').innerHTML = `<a href="#schedule" class="${route==='schedule'?'on':''}">🗓 מערכת שעות</a><a href="#exams" class="${route==='exams'?'on':''}">📝 לוח מבחנים</a>
+    <a href="#tasks" class="${route==='tasks'?'on':''}">✓ משימות</a><a href="#plan" class="${route==='plan'?'on':''}">📚 תכנון חזרה</a><hr>
+    <h3>הקורסים שלי</h3>${VIS.filter(c => mine.includes(c.id)).map(item).join('')}
     ${others.length ? `<hr><h3>שאר הקורסים</h3>${others.map(item).join('')}` : ''}
-    <hr><a href="#schedule">🗓 מערכת שעות</a><a href="#pick">⚙︎ בחירת הקורסים שלי</a>`;
+    <hr><a href="#pick">⚙︎ בחירת הקורסים שלי</a>`;
 }
 function setMenu(open){ $('#drawer').classList.toggle('open', open); $('#overlay').classList.toggle('open', open); $('#menu').setAttribute('aria-expanded', open); }
 $('#menu').onclick = () => setMenu(!$('#drawer').classList.contains('open'));
@@ -780,10 +916,12 @@ $('#overlay').onclick = () => setMenu(false);
 /* ---------- countdown ---------- */
 let timer;
 function tick(){
-  const el = $('#count'); if (!el) return;
-  const [d,t] = el.dataset.at.split('T'); let ms = toDate(d,t) - new Date(); if (ms < 0) ms = 0;
-  const D = Math.floor(ms/864e5), H = Math.floor(ms/36e5)%24, M = Math.floor(ms/6e4)%60;
-  el.innerHTML = `<div><b>${D}</b><span>ימים</span></div><div><b>${H}</b><span>שעות</span></div><div><b>${M}</b><span>דקות</span></div>`;
+  document.querySelectorAll('.count[data-at]').forEach(el => {
+    const [d,t] = el.dataset.at.split('T'); let ms = toDate(d,t) - new Date(); if (ms < 0) ms = 0;
+    const D = Math.floor(ms/864e5), H = Math.floor(ms/36e5)%24, M = Math.floor(ms/6e4)%60;
+    el.innerHTML = (D ? `<div><b>${D}</b><span>${D === 1 ? 'יום' : 'ימים'}</span></div>` : '')
+      + `<div><b>${H}</b><span>${H === 1 ? 'שעה' : 'שעות'}</span></div><div><b>${M}</b><span>דקות</span></div>`;
+  });
 }
 
 /* ---------- router ---------- */
@@ -793,10 +931,10 @@ function render(){
   if (route.startsWith('c-') && byId(route.slice(2))) html = courseView(byId(route.slice(2)));
   else html = ({ schedule:scheduleView, tasks:tasksView, exams:examsView, plan:planView, search:searchView, pick:pickView }[route] || homeView)();
   $('#app').innerHTML = html;
-  const tab = ['tasks','exams','plan','search'].includes(route) ? route : 'home';
+  const tab = ['schedule','tasks','exams','search'].includes(route) ? route : 'home';
   document.querySelectorAll('.tabs a').forEach(a => a.classList.toggle('on', a.dataset.r === tab));
   drawer(route); setMenu(false);
-  clearInterval(timer); tick(); timer = setInterval(tick, 30000);
+  clearInterval(timer); tick(); timer = setInterval(tick, 20000);
   if (route === 'search'){ const q = $('#q'); q.oninput = runSearch; runSearch(); setTimeout(() => q.focus(), 50); }
   const sem = $('#sem'); sem.textContent = DATA.semester;
 }
@@ -808,6 +946,8 @@ document.addEventListener('click', e => {
   const tt = e.target.closest('[data-t]');
   if (tt){ const d = doneTasks(); const id = tt.dataset.t; d.has(id) ? d.delete(id) : d.add(id); store.set('doneTasks', [...d]); const y = scrollY; render(); scrollTo(0,y); return; }
   if (e.target.closest('[data-refresh]')){ loadLive(); return; }
+  const md = e.target.closest('[data-mode]'); if (md){ store.set('schedMode', md.dataset.mode); render(); return; }
+  const wk = e.target.closest('[data-wk]'); if (wk){ weekOff += +wk.dataset.wk; const y = scrollY; render(); scrollTo(0,y); return; }
   const sp = e.target.closest('[data-span]'); if (sp){ store.set('span', +sp.dataset.span); render(); return; }
   const tf = e.target.closest('[data-tf]'); if (tf){ store.set('taskFilter', tf.dataset.tf); render(); return; }
   if (e.target.closest('[data-hide]')){ store.set('hideDone', !store.get('hideDone', false)); render(); return; }
@@ -820,7 +960,7 @@ document.addEventListener('change', e => {
   if (e.target.id === 'lead'){ store.set('lead', +e.target.value); render(); return; }
   if (e.target.closest('.pick')){ const v = [...document.querySelectorAll('.pick input:checked')].map(i => i.value); store.set('mine', v); drawer('pick'); }
 });
-addEventListener('hashchange', () => { render(); scrollTo(0,0); });
+addEventListener('hashchange', () => { weekOff = 0; render(); scrollTo(0,0); });
 render();
 loadLive();
 // keep "class starts in…" fresh, and pull new homework when the app comes back to the screen
