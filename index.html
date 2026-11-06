@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#eaf4f1">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="הקורסים שלנו">
-<title>הקורסים שלנו · שנה א' סמסטר א'</title>
+<meta name="apple-mobile-web-app-title" content="ספורטתרפיה מחזור ט׳">
+<title>ספורטתרפיה מחזור ט׳ · שנה א' סמסטר א'</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="icon-192.png">
@@ -206,6 +206,9 @@ main > .feature{margin-top:16px}
 .feature .fmeta b{color:var(--tint-deep)}
 .feature .btn{position:relative;z-index:1;align-self:center}
 .feature .count{margin-top:2px}
+.feature.f-class{--tint:#d9f1e8;--tint-dot:#7cc9b0;--tint-ink:#2f5d52;--tint-deep:#1f5246}
+.feature.f-exam{--tint:#fde4e2;--tint-dot:#ec8c8c;--tint-ink:#7a3b3b;--tint-deep:#a32d2d}
+.feature .cdot{display:inline-block;width:13px;height:13px;border-radius:50%;background:var(--cdot);margin-inline-end:8px;vertical-align:2px;box-shadow:0 0 0 2px #fff}
 .feature .cdl{font-size:12.5px;font-weight:800;color:var(--tint-deep);margin-top:6px}
 .feature .count div{background:rgba(255,255,255,.75);min-width:58px;padding:6px 10px}
 .feature .count b{font-size:22px;color:var(--tint-deep)}
@@ -291,7 +294,7 @@ main > .feature{margin-top:16px}
 <header class="top"><div class="wrap">
   <a class="brand" href="#home">
     <span class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2f6a61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l10-5 10 5-10 5z"/><path d="M6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/></svg></span>
-    <span><b>הקורסים שלנו</b><small id="sem"></small></span>
+    <span><b>ספורטתרפיה מחזור ט׳</b><small id="sem"></small></span>
   </a>
   <button class="iconbtn" id="menu" type="button" aria-expanded="false" aria-label="רשימת הקורסים">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>קורסים
@@ -557,11 +560,11 @@ function classBanner(cid){
   else if (mins < 48*60 && new Date(now.getTime() + 864e5).getDate() === n.s.getDate()) when = 'מחר, יום ' + DAYS[n.s.getDay()];
   else when = 'יום ' + DAYS[n.s.getDay()] + ' ' + n.s.getDate() + '.' + (n.s.getMonth()+1);
   const live = mins < 60;
-  return `<section class="feature" style="${tintVars(c)}">
+  return `<section class="feature f-class" style="--cdot:${c.hex || '#9bb'}">
     <div class="ficon">${ICON.clock}</div>
     <div class="fbody">
       <div class="flabel">${mins <= 0 ? 'השיעור עכשיו' : 'השיעור הבא'}</div>
-      <a class="ftitle" href="#c-${c.id}">${esc(namesAt(n))}</a>
+      <a class="ftitle" href="#c-${c.id}"><i class="cdot"></i>${esc(namesAt(n))}</a>
       <div class="fmeta"><b>${when}</b> · <span dir="ltr">${n.sl.start}${n.sl.end ? '–' + n.sl.end : ''}</span>${n.sl.place ? ' · ' + esc(n.sl.place) : ''}</div>
       ${mins > 0 ? `<div class="cdl">מתחיל בעוד</div><div class="count" data-at="${startIso}"></div>` : ''}
     </div>
@@ -723,11 +726,11 @@ function homeView(){
   let hero = '';
   if (next){
     const c = shown(next.c);
-    hero = `<section class="feature exam-f" style="${tintVars(c)}">
+    hero = `<section class="feature f-exam" style="--cdot:${c.hex || '#9bb'}">
       <div class="ficon">${ICON.exam}</div>
       <div class="fbody">
         <div class="flabel">המבחן הבא${next.kind && next.kind !== 'מסכם' ? ' · ' + esc(kindLabel(next)) : ''}</div>
-        <a class="ftitle" href="#c-${c.id}">${esc(c.name)}</a>
+        <a class="ftitle" href="#c-${c.id}"><i class="cdot"></i>${esc(c.name)}</a>
         <div class="fmeta"><b>${longDate(next.date)}</b> · ${next.time} · מועד ${next.moed}'</div>
         <div class="cdl">בעוד</div><div class="count" data-at="${next.date}T${next.time}"></div>
       </div>
