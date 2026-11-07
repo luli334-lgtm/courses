@@ -481,6 +481,7 @@ async function loadLive(){
     if (t)     LIVE.tasks = sheetRows(t).map((r, i) => {
       const c = courseFrom(r['קורס']); const type = (r['סוג'] || 'שיעורי בית').trim();
       return { id: 'r' + i + ':' + (r['כותרת']||'') + (r['תאריך']||''), c: c ? c.id : null, type, k: TYPES[type] || 'hw',
+        submit: (v => /לא|ביצוע|לבצע/.test(v) ? false : /כן|הגש/.test(v) ? true : (TYPES[type] || 'hw') === 'work')((r['הגשה'] || '').trim()),
         title: r['כותרת'] || (r['סוג'] ? type : ''), date: fixSwap(normDate(r['תאריך'])), time: normTime(r['שעה']),
         det: r['פרטים'] || '', link: /^https?:\/\//.test(r['קישור']||'') ? r['קישור'] : '' };
     }).filter(x => x.title);
@@ -620,7 +621,8 @@ function taskCal(t){
 }
 function taskRow(t, opts = {}){
   const c = t.c ? shown(t.c) : null; const d = doneTasks().has(t.id); const n = t.date ? daysTo(t.date) : null;
-  const due = t.date ? `${t.k === 'msg' ? '' : 'להגשה עד '}יום ${DAYS[toDate(t.date).getDay()]} ${shortDate(t.date)}${t.time ? ' · ' + t.time : ''}` : '';
+  const pre = t.k === 'msg' ? '' : t.k === 'quiz' ? 'ב' : t.submit ? 'להגשה עד ' : 'לבצע עד ';
+  const due = t.date ? `${pre}יום ${DAYS[toDate(t.date).getDay()]} ${shortDate(t.date)}${t.time ? ' · ' + t.time : ''}` : '';
   return `<div class="task${d ? ' done' : ''}" style="${c ? tintVars(c) : ''}">
     ${t.k !== 'msg' ? `<button class="tick" type="button" data-t="${esc(t.id)}" aria-pressed="${d}" aria-label="סימון: סיימתי">${ICON.check}</button>` : ''}
     <div class="body">
@@ -631,7 +633,7 @@ function taskRow(t, opts = {}){
       <div class="acts">${t.link ? `<a href="${esc(t.link)}" target="_blank" rel="noopener">${ICON.ext}לקישור</a>` : ''}
         ${t.date && n >= 0 && t.k !== 'msg' ? `<a href="${esc(taskCal(t))}" target="_blank" rel="noopener">${ICON.cal}ליומן</a>` : ''}</div>
     </div>
-    ${n != null && t.k !== 'msg' ? `<span class="days ${n < 0 ? 'past' : n <= 3 ? 'near' : ''}">${d ? 'הוגש ✓' : daysLabel(n)}</span>` : ''}
+    ${n != null && t.k !== 'msg' ? `<span class="days ${n < 0 ? 'past' : n <= 3 ? 'near' : ''}">${d ? (t.submit ? 'הוגש ✓' : 'בוצע ✓') : daysLabel(n)}</span>` : ''}
   </div>`;
 }
 // what's still open first (by due date), what's been handed in sinks to the bottom
@@ -717,11 +719,11 @@ function tasksView(){
     <p class="lead">שיעורי בית, עבודות ובחנים מכל הקורסים שלך. סימון ✓ נשמר רק אצלך.</p>
     <div class="seg">${b('all','הכל')}${b('hw','שיעורי בית')}${b('work','עבודות')}${b('quiz','בחנים')}
       <button type="button" data-hide="1" aria-pressed="${hide}">להסתיר מה שסיימתי</button></div>
-    <h2>להגשה</h2>
+    <h2>מה נשאר לעשות</h2>
     <div class="card list">${up.map(t => taskRow(t)).join('') || '<div class="empty">אין משימות פתוחות 🎉</div>'}</div>
     ${m.length ? `<h2>הודעות</h2><div class="card list">${m.slice().reverse().map(t => taskRow(t)).join('')}</div>` : ''}
-    ${past.length ? `<h2>תאריך ההגשה עבר</h2><div class="card list">${past.slice(0,15).map(t => taskRow(t)).join('')}</div>` : ''}
-    ${doneList.length ? `<h2>הוגשו ✓</h2><div class="card list done-list">${doneList.slice(0,30).map(t => taskRow(t)).join('')}</div>` : ''}
+    ${past.length ? `<h2>התאריך עבר</h2><div class="card list">${past.slice(0,15).map(t => taskRow(t)).join('')}</div>` : ''}
+    ${doneList.length ? `<h2>בוצעו ✓</h2><div class="card list done-list">${doneList.slice(0,30).map(t => taskRow(t)).join('')}</div>` : ''}
     ${syncLine()}
   </main>`;
 }
@@ -779,7 +781,7 @@ function homeTasks(){
   const m = msgs().filter(t => (!t.c || isMine(t.c)) && (!t.date || daysTo(t.date) >= -7)).slice(-2).reverse();
   if (!open.length && !m.length) return '';
   return `${m.length ? `<h2>הודעות</h2><div class="card list">${m.map(t => taskRow(t)).join('')}</div>` : ''}
-    ${open.length ? `<h2>להגשה בקרוב <a href="#tasks">כל המשימות</a></h2><div class="card list">${open.map(t => taskRow(t)).join('')}</div>` : ''}`;
+    ${open.length ? `<h2>משימות קרובות <a href="#tasks">כל המשימות</a></h2><div class="card list">${open.map(t => taskRow(t)).join('')}</div>` : ''}`;
 }
 
 function examsView(){
