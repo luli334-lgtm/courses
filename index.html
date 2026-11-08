@@ -474,8 +474,8 @@ async function loadLive(){
   if (!sheetReady()) return;
   LIVE.state = 'loading'; paintSync();
   try{
-    const [rt, rs, rk, rx, rm] = await Promise.allSettled([gviz('משימות'), gviz('מערכת שעות'), gviz('מערכת מהמכללה'), gviz('מבחנים מהמכללה'), gviz('סיכומים')]);
-    if (![rt, rs, rk, rx, rm].some(r => r.status === 'fulfilled')) throw new Error('sheet');
+    const [rt, rs, rk, rx, rm, rd] = await Promise.allSettled([gviz('משימות'), gviz('מערכת שעות'), gviz('מערכת מהמכללה'), gviz('מבחנים מהמכללה'), gviz('סיכומים'), gviz('הגשות מהמכללה')]);
+    if (![rt, rs, rk, rx, rm, rd].some(r => r.status === 'fulfilled')) throw new Error('sheet');
     const ok = (r, ...n) => r.status === 'fulfilled' && hasCols(r.value, ...n) ? r.value : null;
     const t = ok(rt, 'קורס', 'כותרת'), s = ok(rs, 'יום', 'התחלה');
     if (t)     LIVE.tasks = sheetRows(t).map((r, i) => {
@@ -500,6 +500,13 @@ async function loadLive(){
       const x = /\.pdf($|\?)/i.test(u) ? 'pdf' : /document\/d\//.test(u) ? 'doc' : /presentation\/d\//.test(u) ? 'pptx' : /drive\.google/.test(u) ? 'file' : 'link';
       return { cid: c ? c.id : null, t: r['כותרת'] || r['שם הסיכום'] || 'סיכום', u, s: r['כתבה'] || 'הועלה לאתר', c: cat, x, fresh: true };
     }).filter(m => m.cid && /^https?:\/\//.test(m.u));
+    if (ok(rd, 'מזהה', 'כותרת', 'פרטים')){
+      const auto = sheetRows(rd.value).map(r => { const c = byId(r['מזהה']) || courseFrom(r['קורס']);
+        return { id: 'auto:' + (r['כותרת'] || '') + r['תאריך'], c: c ? c.id : null, type: 'עבודה', k: 'work', submit: true, auto: true,
+          title: r['כותרת'] || 'עבודה', date: normDate(r['תאריך']), time: '', det: r['פרטים'] || '', link: '' }; })
+        .filter(t => t.date && !LIVE.tasks.some(m => !m.auto && m.date === t.date && (m.c === t.c || (byId(m.c) || {}).src === t.c)));
+      LIVE.tasks = LIVE.tasks.filter(t => !t.auto).concat(auto);
+    }
     if (ok(rx, 'מזהה', 'מועד')){ const ex = sheetRows(rx.value).map(r => {
       const c = byId(r['מזהה']) || courseFrom(r['קורס']);
       return { c: c ? c.id : null, moed: (r['מועד'] || 'א').replace(/['׳]/g,''), kind: r['סוג'] || 'מסכם', date: normDate(r['תאריך']),
@@ -534,7 +541,9 @@ function slotNext(sl, now = new Date()){
 }
 // a class-feed entry is the exam itself only if it also ends when the exam ends (a normal class can start at the same hour)
 const lenH = k => { if (!k.end || !k.start) return 0; const m = t => { const [h,mi] = t.split(':').map(Number); return h*60 + mi; }; return (m(k.end) - m(k.start)) / 60; };
-const isExamLesson = k => /מבחן|בחינה/.test(k.title || '') || examsSorted().some(e => e.c === k.c && e.date === k.date && e.time === k.start && (e.end ? e.end === k.end : lenH(k) >= 3));
+// a class-feed entry of the same course, on the exam day, at the exam's start time, is the exam itself
+// (the college lists e.g. the chemistry midterm 3.12 09:00–11:30 in the timetable, and 09:00–14:00 in the exam table)
+const isExamLesson = k => /מבחן|בחינה/.test(k.title || '') || examsSorted().some(e => e.c === k.c && e.date === k.date && e.time === k.start);
 const allLessons = () => expand(LIVE.classes.filter(k => !k.special)).map(k => Object.assign(k, { exam: k.c && k.start ? isExamLesson(k) : false }));
 const lessons = () => allLessons().filter(k => k.c && k.start && !k.exam);
 const linkFor = cid => (LIVE.schedule.find(s => (s.c === cid || (byId(s.c) || {}).src === cid) && s.link) || {}).link || '';
@@ -655,15 +664,26 @@ function scheduleView(){
     const PH = 54, H = (hi - lo) / 60 * PH; const td = iso(today0());
     const hours = []; for (let t = lo; t <= hi; t += 60) hours.push(t);
     const col = d => {
-      const ls = d.ls.slice().sort((a,b) => a.start.localeCompare(b.start));
-      const lanes = []; ls.forEach(k => { const s0 = mins(k.start), e0 = mins(k.end || k.start) || s0 + 90; let i = lanes.findIndex(x => x <= s0); if (i < 0){ i = lanes.length; lanes.push(0); } lanes[i] = e0; k._lane = i; k._s = s0; k._e = e0; });
-      const L = Math.max(1, lanes.length);
+      // the same class listed twice in the college feed (same course, same hours) is drawn once
+      const seen = new Set();
+      const ls = d.ls.filter(k => { const key = [k.c || k.title, k.start, k.end].join('|'); if (seen.has(key)) return false; seen.add(key); return true; })
+        .sort((a,b) => a.start.localeCompare(b.start) || (b.end || '').localeCompare(a.end || ''));
+      // side by side only where classes really overlap: each group of overlapping classes gets its own columns
+      let group = [], groupEnd = -1, lanes = [];
+      const close = () => { const n = Math.max(1, lanes.length); group.forEach(k => k._L = n); group = []; lanes = []; };
+      ls.forEach(k => {
+        const s0 = mins(k.start), e0 = (k.end ? mins(k.end) : s0 + 90);
+        if (s0 >= groupEnd) close();
+        let i = lanes.findIndex(x => x <= s0); if (i < 0){ i = lanes.length; lanes.push(0); } lanes[i] = e0;
+        k._lane = i; k._s = s0; k._e = e0; group.push(k); groupEnd = Math.max(groupEnd, e0);
+      });
+      close();
       return `<div class="gcol${d.ds === td ? ' today' : ''}">
         <div class="ghead"><b>${DAYS[d.d.getDay()]}</b><span>${d.d.getDate()}.${d.d.getMonth()+1}</span></div>
         ${d.sp.length ? `<div class="gsp">${d.sp.map(k => esc(k.title)).join(' · ')}</div>` : '<div class="gsp empty"></div>'}
         <div class="gbody" style="height:${H}px">${hours.slice(0,-1).map((t,i) => `<i class="gl" style="top:${i*PH}px"></i>`).join('')}
           ${ls.map(k => { const c = shown(k.c) || {}; const top = (k._s - lo)/60*PH, h = Math.max(26, (k._e - k._s)/60*PH - 3);
-            return `<a class="gev${k.exam ? ' exam' : ''}" href="#c-${c.id || ''}" title="${esc(k.title)}" style="top:${top}px;height:${h}px;right:calc(${k._lane*100/L}% + 2px);width:calc(${100/L}% - 4px);${c.id ? tintVars(c) : ''}">${k.exam ? examTag(k) : ''}<b>${esc(c.name || k.title)}</b><span dir="ltr">${k.start}${k.end ? '–' + k.end : ''}</span>${k.place && h > 60 ? `<span>${esc(k.place)}</span>` : ''}</a>`; }).join('')}
+            return `<a class="gev${k.exam ? ' exam' : ''}" href="#c-${c.id || ''}" title="${esc(k.title)}" style="top:${top}px;height:${h}px;right:calc(${k._lane*100/k._L}% + 2px);width:calc(${100/k._L}% - 4px);${c.id ? tintVars(c) : ''}">${k.exam ? examTag(k) : ''}<b>${esc(c.name || k.title)}</b><span dir="ltr">${k.start}${k.end ? '–' + k.end : ''}</span>${k.place && h > 60 ? `<span>${esc(k.place)}</span>` : ''}</a>`; }).join('')}
         </div></div>`;
     };
     const lbl = weekOff === 0 ? (ws > today0() ? 'השבוע הבא' : 'השבוע') : weekOff === 1 ? 'שבוע הבא' : weekOff === -1 ? 'שבוע שעבר' : '';
