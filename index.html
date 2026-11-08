@@ -528,7 +528,7 @@ function slotNext(sl, now = new Date()){
     const d = new Date(base.getTime() + i*864e5); if (d.getDay() !== sl.day) continue;
     const s = new Date(d.getTime() + toMin(sl.start)*6e4);
     const e = new Date(d.getTime() + toMin(sl.end || sl.start)*6e4 + (sl.end ? 0 : 90*6e4));
-    if (e > now) return { s, e };
+    if (s > now) return { s, e };
   }
   return null;
 }
@@ -547,7 +547,7 @@ function nextClass(onlyMine = true, cid = null){
   if (lessons().length){
     const n = lessons().filter(k => (!onlyMine || isMine(k.c)) && (!cid || forCourse(k.c, byId(cid))))
       .map(k => ({ sl: { c: k.c, start: k.start, end: k.end, place: k.place, link: linkFor(k.c) }, ...lessonTimes(k) }))
-      .filter(x => x.e > now).sort((a,b) => a.s - b.s)[0];
+      .filter(x => x.s > now).sort((a,b) => a.s - b.s)[0];
     return n || null;
   }
   return LIVE.schedule.filter(sl => (!onlyMine || isMine(sl.c)) && (!cid || forCourse(sl.c, byId(cid))))
@@ -962,7 +962,7 @@ function tick(){
     const [d,t] = el.dataset.at.split('T'); let ms = toDate(d,t) - new Date(); if (ms < 0) ms = 0;
     const D = Math.floor(ms/864e5), H = Math.floor(ms/36e5)%24, M = Math.floor(ms/6e4)%60;
     el.innerHTML = (D ? `<div><b>${D}</b><span>${D === 1 ? 'יום' : 'ימים'}</span></div>` : '')
-      + `<div><b>${H}</b><span>${H === 1 ? 'שעה' : 'שעות'}</span></div><div><b>${M}</b><span>דקות</span></div>`;
+      + (D || H ? `<div><b>${H}</b><span>${H === 1 ? 'שעה' : 'שעות'}</span></div>` : '') + `<div><b>${M}</b><span>${M === 1 ? 'דקה' : 'דקות'}</span></div>`;
   });
 }
 
